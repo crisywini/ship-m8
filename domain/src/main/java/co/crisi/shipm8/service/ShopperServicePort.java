@@ -3,6 +3,7 @@ package co.crisi.shipm8.service;
 import co.crisi.shipm8.domain.IShopper;
 import co.crisi.shipm8.port.api.IShopperServicePort;
 import java.util.List;
+import java.util.Optional;
 
 public class ShopperServicePort implements IShopperServicePort {
 
@@ -12,7 +13,7 @@ public class ShopperServicePort implements IShopperServicePort {
     }
 
     @Override
-    public IShopper getById(Long aLong) {
+    public Optional<IShopper> getById(Long aLong) {
         return null;
     }
 
