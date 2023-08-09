@@ -18,7 +18,7 @@ public interface IShopper {
 
     String getPassword();
 
-    Integer getPhoneNumber();
+    String getPhoneNumber();
 
     LocalDate getDateOfBirth();
 
