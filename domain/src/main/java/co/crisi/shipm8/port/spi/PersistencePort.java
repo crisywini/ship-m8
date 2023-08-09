@@ -7,10 +7,12 @@ public interface PersistencePort<T, ID> {
 
     T save(T entity);
 
-    Optional<T> getById(ID id);
+    Optional<T> findById(ID id);
 
-    List<T> getAll();
+    List<T> findAll();
 
     void deleteById(ID id);
+
+    boolean existsById(ID id);
 
 }

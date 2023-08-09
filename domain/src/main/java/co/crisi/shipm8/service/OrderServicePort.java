@@ -3,8 +3,11 @@ package co.crisi.shipm8.service;
 import co.crisi.shipm8.domain.IOrder;
 import co.crisi.shipm8.port.api.IOrderServicePort;
 import java.util.List;
+import java.util.Optional;
 
 public class OrderServicePort implements IOrderServicePort {
+
+    
 
     @Override
     public IOrder save(IOrder entity) {
@@ -12,7 +15,7 @@ public class OrderServicePort implements IOrderServicePort {
     }
 
     @Override
-    public IOrder getById(Long aLong) {
+    public Optional<IOrder> getById(Long aLong) {
         return null;
     }
 
