@@ -1,10 +1,33 @@
 package co.crisi.shipm8.domain.data;
 
 import co.crisi.shipm8.domain.IAddress;
+import co.crisi.shipm8.domain.validator.decorator.NonNullValidatorDecorator;
+import co.crisi.shipm8.domain.validator.decorator.NonEmptyValidatorDecorator;
+import co.crisi.shipm8.domain.validator.decorator.Validator;
 
 public record Address(Long id, Shopper shopper, String recipientName, String streetAddress, String city,
                       String stateProvinceRegion, String postalCode, String country, String phoneNumber,
                       AddressType type, Boolean primaryAddress) implements IAddress {
+
+    public Address(Long id, Shopper shopper, String recipientName, String streetAddress, String city,
+            String stateProvinceRegion, String postalCode, String country, String phoneNumber, AddressType type,
+            Boolean primaryAddress) {
+
+        var validator = new Validator();
+        var nonNullValidator = new NonNullValidatorDecorator(validator);
+        var nonEmptyValidator = new NonEmptyValidatorDecorator(nonNullValidator);
+        this.id = id;
+        this.shopper = nonNullValidator.validate(shopper, "shopper");
+        this.recipientName = nonEmptyValidator.validate(recipientName, "recipient name");
+        this.streetAddress = nonEmptyValidator.validate(streetAddress, "street address");
+        this.city = nonEmptyValidator.validate(city, "city");
+        this.stateProvinceRegion = nonEmptyValidator.validate(stateProvinceRegion, "state/province/region");
+        this.postalCode = nonEmptyValidator.validate(postalCode, "postal code");
+        this.country = nonEmptyValidator.validate(country, "country");
+        this.phoneNumber = nonEmptyValidator.validate(phoneNumber, "phone number");
+        this.type = nonNullValidator.validate(type, "type");
+        this.primaryAddress = primaryAddress;
+    }
 
     @Override
     public Long getId() {

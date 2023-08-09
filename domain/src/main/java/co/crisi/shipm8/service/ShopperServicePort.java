@@ -1,9 +1,9 @@
 package co.crisi.shipm8.service;
 
 import co.crisi.shipm8.domain.IShopper;
-import co.crisi.shipm8.exception.BusinessException;
-import co.crisi.shipm8.exception.RepeatedProductException;
-import co.crisi.shipm8.exception.ShopperNotFoundException;
+import co.crisi.shipm8.exception.business.BusinessException;
+import co.crisi.shipm8.exception.business.RepeatedProductException;
+import co.crisi.shipm8.exception.business.ShopperNotFoundException;
 import co.crisi.shipm8.port.api.IShopperServicePort;
 import co.crisi.shipm8.port.spi.IShopperPersistencePort;
 import java.util.List;

@@ -1,9 +1,9 @@
 package co.crisi.shipm8.service;
 
 import co.crisi.shipm8.domain.IAddress;
-import co.crisi.shipm8.exception.AddressNotFoundException;
-import co.crisi.shipm8.exception.BusinessException;
-import co.crisi.shipm8.exception.RepeatedAddressException;
+import co.crisi.shipm8.exception.business.AddressNotFoundException;
+import co.crisi.shipm8.exception.business.BusinessException;
+import co.crisi.shipm8.exception.business.RepeatedAddressException;
 import co.crisi.shipm8.port.api.IAddressServicePort;
 import co.crisi.shipm8.port.spi.IAddressPersistencePort;
 import java.util.List;

@@ -1,9 +1,9 @@
 package co.crisi.shipm8.service;
 
 import co.crisi.shipm8.domain.IProduct;
-import co.crisi.shipm8.exception.BusinessException;
-import co.crisi.shipm8.exception.ProductNotFoundException;
-import co.crisi.shipm8.exception.RepeatedProductException;
+import co.crisi.shipm8.exception.business.BusinessException;
+import co.crisi.shipm8.exception.business.ProductNotFoundException;
+import co.crisi.shipm8.exception.business.RepeatedProductException;
 import co.crisi.shipm8.port.api.IProductServicePort;
 import co.crisi.shipm8.port.spi.IProductPersistencePort;
 import java.util.List;

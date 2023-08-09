@@ -1,9 +1,9 @@
 package co.crisi.shipm8.service;
 
 import co.crisi.shipm8.domain.IOrder;
-import co.crisi.shipm8.exception.BusinessException;
-import co.crisi.shipm8.exception.OrderNotFoundException;
-import co.crisi.shipm8.exception.RepeatedOrderException;
+import co.crisi.shipm8.exception.business.BusinessException;
+import co.crisi.shipm8.exception.business.OrderNotFoundException;
+import co.crisi.shipm8.exception.business.RepeatedOrderException;
 import co.crisi.shipm8.port.api.IOrderServicePort;
 import co.crisi.shipm8.port.spi.IOrderPersistencePort;
 import java.util.List;

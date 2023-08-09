@@ -1,9 +1,9 @@
 package co.crisi.shipm8.service;
 
 import co.crisi.shipm8.domain.IDiscount;
-import co.crisi.shipm8.exception.BusinessException;
-import co.crisi.shipm8.exception.DiscountNotFoundException;
-import co.crisi.shipm8.exception.RepeatedDiscountException;
+import co.crisi.shipm8.exception.business.BusinessException;
+import co.crisi.shipm8.exception.business.DiscountNotFoundException;
+import co.crisi.shipm8.exception.business.RepeatedDiscountException;
 import co.crisi.shipm8.port.api.IDiscountServicePort;
 import co.crisi.shipm8.port.spi.IDiscountPersistencePort;
 import java.util.List;
