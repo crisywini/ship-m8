@@ -1,4 +1,6 @@
-package co.crisi.shipm8.domain;
+package co.crisi.shipm8.domain.data;
+
+import co.crisi.shipm8.domain.IAddress;
 
 public record Address(Long id, Shopper shopper, String recipientName, String streetAddress, String city,
                       String stateProvinceRegion, String postalCode, String country, String phoneNumber,
