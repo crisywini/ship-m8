@@ -23,8 +23,22 @@
   <description>ship-m8</description>
   <properties>
     <java.version>17</java.version>
+    <org.mapstruct.version>1.5.3.Final</org.mapstruct.version>
+    <org.lombok.version>1.18.24</org.lombok.version>
+    <org.lombok-mapstruct-binding.version>0.2.0</org.lombok-mapstruct-binding.version>
   </properties>
   <dependencies>
+    <dependency>
+      <groupId>org.projectlombok</groupId>
+      <artifactId>lombok</artifactId>
+      <version>${org.lombok.version}</version>
+      <optional>true</optional>
+    </dependency>
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct</artifactId>
+      <version>${org.mapstruct.version}</version>
+    </dependency>
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
@@ -34,16 +48,13 @@
       <artifactId>spring-kafka</artifactId>
     </dependency>
 
+
     <dependency>
       <groupId>org.postgresql</groupId>
       <artifactId>postgresql</artifactId>
       <scope>runtime</scope>
     </dependency>
-    <dependency>
-      <groupId>org.projectlombok</groupId>
-      <artifactId>lombok</artifactId>
-      <optional>true</optional>
-    </dependency>
+
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -68,6 +79,7 @@
               <artifactId>lombok</artifactId>
             </exclude>
           </excludes>
+          <skip>true</skip>
         </configuration>
       </plugin>
     </plugins>
