@@ -8,17 +8,18 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
-import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
+import org.springframework.data.relational.core.mapping.Table;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Getter
+@Table(name = "discount")
 public class DiscountJDBCEntity implements Serializable, IDiscount {
 
     @Id
+    @Column("discount_id")
     private Long id;
 
     private String name;
@@ -37,6 +38,11 @@ public class DiscountJDBCEntity implements Serializable, IDiscount {
 
     @Column("minimum_order_amount")
     private Integer minimumOrderAmount;
+
+    @Override
+    public Long getId() {
+        return id;
+    }
 
     @Override
     public String getName() {
