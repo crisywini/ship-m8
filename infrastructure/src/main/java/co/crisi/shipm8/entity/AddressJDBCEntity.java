@@ -5,15 +5,17 @@ import co.crisi.shipm8.domain.IShopper;
 import co.crisi.shipm8.domain.data.AddressType;
 import java.io.Serializable;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 @Table(name = "address")
 public class AddressJDBCEntity implements Serializable, IAddress {
 
     @Id
+    @Column("address_id")
     private Long id;
 
-    private IShopper shopper;
+    private ShopperJDBCEntity shopper;
 
     private String recipientName;
 

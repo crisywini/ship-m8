@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.MappedCollection;
 import org.springframework.data.relational.core.mapping.Table;
 
@@ -16,6 +18,8 @@ import org.springframework.data.relational.core.mapping.Table;
 @NoArgsConstructor
 public class ShopperJDBCEntity implements IShopper {
 
+    @Id
+    @Column("shopper_id")
     private Long id;
 
     private String firstName;

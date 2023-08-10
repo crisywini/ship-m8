@@ -1,6 +1,9 @@
 package co.crisi.shipm8.domain.data;
 
+import co.crisi.shipm8.domain.IAddress;
 import co.crisi.shipm8.domain.IOrder;
+import co.crisi.shipm8.domain.IProduct;
+import co.crisi.shipm8.domain.IShopper;
 import co.crisi.shipm8.domain.validator.decorator.DateValidatorDecorator;
 import co.crisi.shipm8.domain.validator.decorator.NonEmptyCollectionValidatorDecorator;
 import co.crisi.shipm8.domain.validator.decorator.NonEmptyValidatorDecorator;
@@ -10,16 +13,16 @@ import co.crisi.shipm8.domain.validator.decorator.Validator;
 import java.time.LocalDate;
 import java.util.List;
 
-public record Order(Long id, LocalDate orderDate, OrderStatus orderStatus, Double totalPrice, Address shippingAddress,
-                    Address billingAddress, PaymentMethod paymentMethod, PaymentStatus paymentStatus,
+public record Order(Long id, LocalDate orderDate, OrderStatus orderStatus, Double totalPrice, IAddress shippingAddress,
+                    IAddress billingAddress, PaymentMethod paymentMethod, PaymentStatus paymentStatus,
                     ShippingMethod shippingMethod, String orderNotes, String cancellationReason,
-                    LocalDate orderCompletionDate, List<Product> products, Shopper shopper) implements IOrder {
+                    LocalDate orderCompletionDate, List<IProduct> products, IShopper shopper) implements IOrder {
 
-    public Order(Long id, LocalDate orderDate, OrderStatus orderStatus, Double totalPrice, Address shippingAddress,
-            Address billingAddress, PaymentMethod paymentMethod, PaymentStatus paymentStatus,
+    public Order(Long id, LocalDate orderDate, OrderStatus orderStatus, Double totalPrice, IAddress shippingAddress,
+            IAddress billingAddress, PaymentMethod paymentMethod, PaymentStatus paymentStatus,
             ShippingMethod shippingMethod,
-            String orderNotes, String cancellationReason, LocalDate orderCompletionDate, List<Product> products,
-            Shopper shopper) {
+            String orderNotes, String cancellationReason, LocalDate orderCompletionDate, List<IProduct> products,
+            IShopper shopper) {
         var validator = new Validator();
         var nonNullValidator = new NonNullValidatorDecorator(validator);
         var dateValidator = new DateValidatorDecorator(nonNullValidator);
@@ -62,12 +65,12 @@ public record Order(Long id, LocalDate orderDate, OrderStatus orderStatus, Doubl
     }
 
     @Override
-    public Address getShippingAddress() {
+    public IAddress getShippingAddress() {
         return shippingAddress;
     }
 
     @Override
-    public Address getBillingAddress() {
+    public IAddress getBillingAddress() {
         return billingAddress;
     }
 
@@ -102,12 +105,12 @@ public record Order(Long id, LocalDate orderDate, OrderStatus orderStatus, Doubl
     }
 
     @Override
-    public List<Product> getProducts() {
+    public List<IProduct> getProducts() {
         return products;
     }
 
     @Override
-    public Shopper getShopper() {
+    public IShopper getShopper() {
         return shopper;
     }
 
