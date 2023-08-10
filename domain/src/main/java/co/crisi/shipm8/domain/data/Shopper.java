@@ -1,7 +1,8 @@
 package co.crisi.shipm8.domain.data;
 
+import co.crisi.shipm8.domain.IAddress;
+import co.crisi.shipm8.domain.IOrder;
 import co.crisi.shipm8.domain.IShopper;
-import co.crisi.shipm8.domain.validator.SpaceBetweenDatesValidator;
 import co.crisi.shipm8.domain.validator.decorator.DateValidatorDecorator;
 import co.crisi.shipm8.domain.validator.decorator.NonEmptyValidatorDecorator;
 import co.crisi.shipm8.domain.validator.decorator.NonNullValidatorDecorator;
@@ -13,11 +14,11 @@ public record Shopper(Long id, String firstName, String lastName, String email,
                       String password, String phoneNumber, LocalDate dateOfBirth,
                       String gender, LocalDate registrationDate,
                       LocalDate lastLoginDate, Role role, Boolean activeStatus,
-                      String profilePicture, List<Order> orders, List<Address> addresses) implements IShopper {
+                      String profilePicture, List<IOrder> orders, List<IAddress> addresses) implements IShopper {
 
     public Shopper(Long id, String firstName, String lastName, String email, String password, String phoneNumber,
             LocalDate dateOfBirth, String gender, LocalDate registrationDate, LocalDate lastLoginDate, Role role,
-            Boolean activeStatus, String profilePicture, List<Order> orders, List<Address> addresses) {
+            Boolean activeStatus, String profilePicture, List<IOrder> orders, List<IAddress> addresses) {
         var validator = new Validator();
         var nonNullValidator = new NonNullValidatorDecorator(validator);
         var nonEmptyStringValidator = new NonEmptyValidatorDecorator(nonNullValidator);
@@ -105,12 +106,12 @@ public record Shopper(Long id, String firstName, String lastName, String email,
     }
 
     @Override
-    public List<Order> getOrders() {
+    public List<IOrder> getOrders() {
         return orders;
     }
 
     @Override
-    public List<Address> getAddresses() {
+    public List<IAddress> getAddresses() {
         return addresses;
     }
 
