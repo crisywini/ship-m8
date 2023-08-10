@@ -4,11 +4,17 @@ import co.crisi.shipm8.domain.IAddress;
 import co.crisi.shipm8.domain.IShopper;
 import co.crisi.shipm8.domain.data.AddressType;
 import java.io.Serializable;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "address")
+@Builder
 public class AddressJDBCEntity implements Serializable, IAddress {
 
     @Id
