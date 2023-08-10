@@ -1,15 +1,16 @@
 package co.crisi.shipm8.domain.data;
 
 import co.crisi.shipm8.domain.IAddress;
+import co.crisi.shipm8.domain.IShopper;
 import co.crisi.shipm8.domain.validator.decorator.NonNullValidatorDecorator;
 import co.crisi.shipm8.domain.validator.decorator.NonEmptyValidatorDecorator;
 import co.crisi.shipm8.domain.validator.decorator.Validator;
 
-public record Address(Long id, Shopper shopper, String recipientName, String streetAddress, String city,
+public record Address(Long id, IShopper shopper, String recipientName, String streetAddress, String city,
                       String stateProvinceRegion, String postalCode, String country, String phoneNumber,
                       AddressType type, Boolean primaryAddress) implements IAddress {
 
-    public Address(Long id, Shopper shopper, String recipientName, String streetAddress, String city,
+    public Address(Long id, IShopper shopper, String recipientName, String streetAddress, String city,
             String stateProvinceRegion, String postalCode, String country, String phoneNumber, AddressType type,
             Boolean primaryAddress) {
 
@@ -35,7 +36,7 @@ public record Address(Long id, Shopper shopper, String recipientName, String str
     }
 
     @Override
-    public Shopper getShopper() {
+    public IShopper getShopper() {
         return shopper;
     }
 

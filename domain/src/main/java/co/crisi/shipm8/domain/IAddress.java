@@ -1,13 +1,12 @@
 package co.crisi.shipm8.domain;
 
 import co.crisi.shipm8.domain.data.AddressType;
-import co.crisi.shipm8.domain.data.Shopper;
 
 public interface IAddress {
 
     Long getId();
 
-    Shopper getShopper();
+    IShopper getShopper();
 
     String getRecipientName();
 
