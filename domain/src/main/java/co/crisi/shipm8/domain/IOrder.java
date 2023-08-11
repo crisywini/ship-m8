@@ -1,12 +1,9 @@
 package co.crisi.shipm8.domain;
 
-import co.crisi.shipm8.domain.data.Address;
 import co.crisi.shipm8.domain.data.OrderStatus;
 import co.crisi.shipm8.domain.data.PaymentMethod;
 import co.crisi.shipm8.domain.data.PaymentStatus;
-import co.crisi.shipm8.domain.data.Product;
 import co.crisi.shipm8.domain.data.ShippingMethod;
-import co.crisi.shipm8.domain.data.Shopper;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -20,9 +17,9 @@ public interface IOrder {
 
     Double getTotalPrice();
 
-    Address getShippingAddress();
+    IAddress getShippingAddress();
 
-    Address getBillingAddress();
+    IAddress getBillingAddress();
 
     PaymentMethod getPaymentMethod();
 
@@ -36,8 +33,8 @@ public interface IOrder {
 
     LocalDate getOrderCompletionDate();
 
-    List<Product> getProducts();
+    List<IProduct> getProducts();
 
-    Shopper getShopper();
+    IShopper getShopper();
 
 }

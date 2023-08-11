@@ -1,5 +1,6 @@
 package co.crisi.shipm8.domain.data;
 
+import co.crisi.shipm8.domain.IDiscount;
 import co.crisi.shipm8.domain.IProduct;
 import co.crisi.shipm8.domain.data.Discount;
 import co.crisi.shipm8.domain.validator.decorator.NonNegativeNumberValidatorDecorator;
@@ -8,10 +9,10 @@ import co.crisi.shipm8.domain.validator.decorator.Validator;
 import java.util.List;
 
 public record Product(Long id, Long productId, Integer quantity, Double pricePerUnit, Double totalPrice,
-                      List<Discount> discounts, Double tax) implements IProduct {
+                      List<IDiscount> discounts, Double tax) implements IProduct {
 
     public Product(Long id, Long productId, Integer quantity, Double pricePerUnit, Double totalPrice,
-            List<Discount> discounts, Double tax) {
+            List<IDiscount> discounts, Double tax) {
         var validator = new Validator();
         var nonNullValidator = new NonNullValidatorDecorator(validator);
         var nonNegativeNumberValidator = new NonNegativeNumberValidatorDecorator(nonNullValidator);
@@ -50,7 +51,7 @@ public record Product(Long id, Long productId, Integer quantity, Double pricePer
     }
 
     @Override
-    public List<Discount> getDiscounts() {
+    public List<IDiscount> getDiscounts() {
         return discounts;
     }
 

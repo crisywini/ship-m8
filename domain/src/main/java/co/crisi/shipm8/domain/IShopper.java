@@ -34,8 +34,8 @@ public interface IShopper {
 
     String getProfilePicture();
 
-    List<Order> getOrders();
+    List<IOrder> getOrders();
 
-    List<Address> getAddresses();
+    List<IAddress> getAddresses();
 
 }

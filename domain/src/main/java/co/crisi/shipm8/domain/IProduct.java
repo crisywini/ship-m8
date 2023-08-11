@@ -1,6 +1,5 @@
 package co.crisi.shipm8.domain;
 
-import co.crisi.shipm8.domain.data.Discount;
 import java.util.List;
 
 public interface IProduct {
@@ -15,7 +14,7 @@ public interface IProduct {
 
     Double getTotalPrice();
 
-    List<Discount> getDiscounts();
+    List<IDiscount> getDiscounts();
 
     Double getTax();
 
