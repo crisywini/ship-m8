@@ -16,4 +16,31 @@
     <maven.compiler.target>17</maven.compiler.target>
   </properties>
 
+  <dependencies>
+    <dependency>
+      <groupId>co.crisi</groupId>
+      <artifactId>domain</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>co.crisi</groupId>
+      <artifactId>infraestructure</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+  </dependencies>
+
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-maven-plugin</artifactId>
+        <configuration>
+          <skip>false</skip>
+          <mainClass>co.crisi.shipm8.ShipM8Application</mainClass>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+
 </project>

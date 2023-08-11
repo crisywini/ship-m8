@@ -1,7 +1,6 @@
 package co.crisi.shipm8.adapter.jdbc;
 
 import co.crisi.shipm8.domain.IDiscount;
-import co.crisi.shipm8.entity.DiscountJDBCEntity;
 import co.crisi.shipm8.mapper.DiscountMapper;
 import co.crisi.shipm8.port.spi.IDiscountPersistencePort;
 import co.crisi.shipm8.repository.jdbc.DiscountJDBCRepository;
@@ -11,9 +10,9 @@ import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-@Repository
+@Component
 @RequiredArgsConstructor
 public class DiscountPersistenceJDBCAdapter implements IDiscountPersistencePort {
 

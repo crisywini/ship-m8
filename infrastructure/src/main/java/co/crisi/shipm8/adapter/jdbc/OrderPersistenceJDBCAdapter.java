@@ -5,15 +5,14 @@ import co.crisi.shipm8.entity.OrderJDBCEntity;
 import co.crisi.shipm8.mapper.OrderMapper;
 import co.crisi.shipm8.port.spi.IOrderPersistencePort;
 import co.crisi.shipm8.repository.jdbc.OrderJDBCRepository;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Component;
 
-@Repository
+@Component
 @RequiredArgsConstructor
 public class OrderPersistenceJDBCAdapter implements IOrderPersistencePort {
 
