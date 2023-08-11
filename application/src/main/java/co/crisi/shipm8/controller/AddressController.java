@@ -4,6 +4,7 @@ import co.crisi.shipm8.domain.data.Address;
 import co.crisi.shipm8.mapper.AddressDtoMapper;
 import co.crisi.shipm8.model.AddressDto;
 import co.crisi.shipm8.port.api.IAddressServicePort;
+import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.ResponseEntity;
@@ -36,6 +37,14 @@ public class AddressController {
                     Long id) {
         return ResponseEntity.ok(mapper.map(servicePort.getById(id)));
     }
+
+
+    @GetMapping
+    public ResponseEntity<List<AddressDto>> findAll() {
+        return ResponseEntity.ok(mapper.map(servicePort.getAll()));
+    }
+
+
 
 
 }
