@@ -26,8 +26,9 @@ public class DiscountServicePort implements IDiscountServicePort {
     }
 
     @Override
-    public Optional<IDiscount> getById(Long id) {
-        return persistencePort.findById(id);
+    public IDiscount getById(Long id) {
+        return persistencePort.findById(id)
+                .orElseThrow(() -> new DiscountNotFoundException(String.format("The id %d was not found!", id)));
     }
 
     @Override

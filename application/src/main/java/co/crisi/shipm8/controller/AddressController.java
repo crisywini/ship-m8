@@ -46,7 +46,7 @@ public class AddressController {
     public ResponseEntity<List<AddressDto>> findAll() {
         return ResponseEntity.ok(mapper.map(servicePort.getAll()));
     }
-    
+
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteById(@PathVariable(name = "id") Long id){
