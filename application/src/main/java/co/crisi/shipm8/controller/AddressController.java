@@ -7,11 +7,13 @@ import co.crisi.shipm8.port.api.IAddressServicePort;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -35,7 +37,7 @@ public class AddressController {
     public ResponseEntity<AddressDto> findById(
             @PathVariable(name = "id")
                     Long id) {
-        return ResponseEntity.ok(mapper.map(servicePort.getById(id)));
+        return new ResponseEntity<>(mapper.map(servicePort.getById(id)), HttpStatus.CREATED);
     }
 
 
@@ -45,6 +47,17 @@ public class AddressController {
     }
 
 
+    @PutMapping("/{id}")
+    public ResponseEntity<AddressDto> update(
+            @PathVariable(name = "id")
+                    Long id,
+            @RequestBody
+                    Address newInfo) {
+        var updated = servicePort.update(id, newInfo);
+        return ResponseEntity.ok(mapper.map(updated));
+    }
+
+    
 
 
 }
