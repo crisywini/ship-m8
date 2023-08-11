@@ -5,7 +5,7 @@ import co.crisi.shipm8.model.ProductDto;
 import java.util.List;
 import org.mapstruct.Mapper;
 
-@Mapper
+@Mapper(uses = DiscountDtoMapper.class)
 public interface ProductDtoMapper {
 
     ProductDto map(IProduct product);
