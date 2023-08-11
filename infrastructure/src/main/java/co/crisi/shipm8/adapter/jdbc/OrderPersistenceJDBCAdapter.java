@@ -35,7 +35,7 @@ public class OrderPersistenceJDBCAdapter implements IOrderPersistencePort {
 
     @Override
     public List<IOrder> findAll() {
-        return new ArrayList<>((Collection<? extends IOrder>) repository.findAll());
+        return List.copyOf((Collection<? extends IOrder>) repository.findAll());
     }
 
     @Override
