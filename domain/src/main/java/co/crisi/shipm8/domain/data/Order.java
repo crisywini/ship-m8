@@ -6,7 +6,6 @@ import co.crisi.shipm8.domain.IProduct;
 import co.crisi.shipm8.domain.IShopper;
 import co.crisi.shipm8.domain.validator.decorator.DateValidatorDecorator;
 import co.crisi.shipm8.domain.validator.decorator.NonEmptyCollectionValidatorDecorator;
-import co.crisi.shipm8.domain.validator.decorator.NonEmptyValidatorDecorator;
 import co.crisi.shipm8.domain.validator.decorator.NonNegativeNumberValidatorDecorator;
 import co.crisi.shipm8.domain.validator.decorator.NonNullValidatorDecorator;
 import co.crisi.shipm8.domain.validator.decorator.Validator;
