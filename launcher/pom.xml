@@ -24,7 +24,12 @@
     </dependency>
     <dependency>
       <groupId>co.crisi</groupId>
-      <artifactId>infraestructure</artifactId>
+      <artifactId>infrastructure</artifactId>
+      <version>${project.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>co.crisi</groupId>
+      <artifactId>application</artifactId>
       <version>${project.version}</version>
     </dependency>
   </dependencies>
