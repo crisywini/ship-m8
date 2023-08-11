@@ -1,6 +1,5 @@
 package co.crisi.shipm8.controller;
 
-import co.crisi.shipm8.domain.IAddress;
 import co.crisi.shipm8.domain.data.Address;
 import co.crisi.shipm8.mapper.AddressDtoMapper;
 import co.crisi.shipm8.model.AddressDto;
@@ -9,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,13 @@ public class AddressController {
                     Address address) {
         return ResponseEntity.ok(mapper.map(servicePort.save(address)));
     }
-    
+
+    @GetMapping("/{id}")
+    public ResponseEntity<AddressDto> findById(
+            @PathVariable(name = "id")
+                    Long id) {
+        return ResponseEntity.ok(mapper.map(servicePort.getById(id)));
+    }
+
 
 }

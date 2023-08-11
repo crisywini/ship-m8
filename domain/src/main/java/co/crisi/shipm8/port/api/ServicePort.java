@@ -7,7 +7,7 @@ public interface ServicePort<T, ID> {
 
     T save(T entity);
 
-    Optional<T> getById(ID id);
+    T getById(ID id);
 
     List<T> getAll();
 

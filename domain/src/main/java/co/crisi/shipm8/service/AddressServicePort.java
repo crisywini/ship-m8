@@ -24,8 +24,9 @@ public class AddressServicePort implements IAddressServicePort {
     }
 
     @Override
-    public Optional<IAddress> getById(Long id) {
-        return persistencePort.findById(id);
+    public IAddress getById(Long id) {
+        return persistencePort.findById(id)
+                .orElseThrow(() -> new AddressNotFoundException(String.format("The address %d was not found!", id)));
     }
 
     @Override
