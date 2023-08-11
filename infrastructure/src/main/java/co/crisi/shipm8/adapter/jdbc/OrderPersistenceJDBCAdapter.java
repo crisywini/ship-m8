@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Repository;
 
-@Repositoryash
+@Repository
 @RequiredArgsConstructor
 public class OrderPersistenceJDBCAdapter implements IOrderPersistencePort {
 
