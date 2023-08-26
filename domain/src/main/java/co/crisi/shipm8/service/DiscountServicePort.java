@@ -7,6 +7,7 @@ import co.crisi.shipm8.exception.business.RepeatedDiscountException;
 import co.crisi.shipm8.port.api.IDiscountServicePort;
 import co.crisi.shipm8.port.spi.IDiscountPersistencePort;
 import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -17,10 +18,15 @@ public class DiscountServicePort implements IDiscountServicePort {
 
     @Override
     public IDiscount save(IDiscount entity) {
-        if (persistencePort.existsById(entity.getId())) {
-            throw new RepeatedDiscountException(
-                    String.format("The discount with id %d already exists!", entity.getId()));
-        }
+        var discountId = Optional.ofNullable(entity.getId());
+        discountId.map(id -> {
+            if (persistencePort.existsById(entity.getId())) {
+                throw new RepeatedDiscountException(
+                        String.format("The discount with id %d already exists!", entity.getId()));
+            }
+            return id;
+        });
+
         return persistencePort.save(entity);
     }
 

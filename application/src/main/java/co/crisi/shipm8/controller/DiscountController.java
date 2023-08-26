@@ -6,6 +6,7 @@ import co.crisi.shipm8.model.DiscountDto;
 import co.crisi.shipm8.port.api.IDiscountServicePort;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+@Slf4j
 @Controller
 @RequestMapping("/discounts")
 @RequiredArgsConstructor
@@ -30,6 +32,7 @@ public class DiscountController {
     public ResponseEntity<DiscountDto> save(
             @RequestBody
                     Discount discount) {
+        log.debug("discount {}", discount);
         return new ResponseEntity<>(mapper.map(servicePort.save(discount)), HttpStatus.CREATED);
     }
 

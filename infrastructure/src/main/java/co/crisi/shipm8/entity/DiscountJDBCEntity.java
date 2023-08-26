@@ -18,7 +18,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @AllArgsConstructor
 @Table(name = "discount")
 @Builder
-public class DiscountJDBCEntity implements Serializable, IDiscount {
+public class DiscountJDBCEntity implements Serializable, IDiscount{
 
     @Id
     @Column("discount_id")
