@@ -38,8 +38,10 @@ public class DiscountController {
         return ResponseEntity.ok(mapper.map(servicePort.getAll()));
     }
 
-    @GetMapping
-    public ResponseEntity<DiscountDto> findById(Long id) {
+    @GetMapping("/{id}")
+    public ResponseEntity<DiscountDto> findById(
+            @PathVariable(name = "id")
+                    Long id) {
         return ResponseEntity.ok(mapper.map(servicePort.getById(id)));
     }
 

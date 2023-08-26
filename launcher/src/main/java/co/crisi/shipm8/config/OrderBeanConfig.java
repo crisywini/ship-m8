@@ -16,9 +16,4 @@ public class OrderBeanConfig {
         return new OrderServicePort(persistencePort);
     }
 
-    @Bean
-    public IOrderPersistencePort orderPersistencePort(OrderJDBCRepository repository) {
-        return new OrderPersistenceJDBCAdapter(repository);
-    }
-
 }
