@@ -7,6 +7,7 @@ import co.crisi.shipm8.exception.business.RepeatedAddressException;
 import co.crisi.shipm8.port.api.IAddressServicePort;
 import co.crisi.shipm8.port.spi.IAddressPersistencePort;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 
@@ -17,7 +18,7 @@ public class AddressServicePort implements IAddressServicePort {
 
     @Override
     public IAddress save(IAddress entity) {
-        if (persistencePort.existsById(entity.getId())) {
+        if (Objects.nonNull(entity.getId()) && persistencePort.existsById(entity.getId())) {
             throw new RepeatedAddressException(String.format("The address with id %d already exists!", entity.getId()));
         }
         return persistencePort.save(entity);
