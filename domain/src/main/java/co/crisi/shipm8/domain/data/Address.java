@@ -5,11 +5,13 @@ import co.crisi.shipm8.domain.IShopper;
 import co.crisi.shipm8.domain.validator.decorator.NonNullValidatorDecorator;
 import co.crisi.shipm8.domain.validator.decorator.NonEmptyValidatorDecorator;
 import co.crisi.shipm8.domain.validator.decorator.Validator;
+import lombok.Builder;
 
 public record Address(Long id, IShopper shopper, String recipientName, String streetAddress, String city,
                       String stateProvinceRegion, String postalCode, String country, String phoneNumber,
                       AddressType type, Boolean primaryAddress) implements IAddress {
 
+    @Builder
     public Address(Long id, IShopper shopper, String recipientName, String streetAddress, String city,
             String stateProvinceRegion, String postalCode, String country, String phoneNumber, AddressType type,
             Boolean primaryAddress) {

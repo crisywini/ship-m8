@@ -6,10 +6,12 @@ import co.crisi.shipm8.domain.validator.decorator.NonNegativeNumberValidatorDeco
 import co.crisi.shipm8.domain.validator.decorator.NonNullValidatorDecorator;
 import co.crisi.shipm8.domain.validator.decorator.Validator;
 import java.util.List;
+import lombok.Builder;
 
 public record Product(Long id, Long productId, Integer quantity, Double pricePerUnit, Double totalPrice,
                       List<IDiscount> discounts, Double tax) implements IProduct {
 
+    @Builder
     public Product(Long id, Long productId, Integer quantity, Double pricePerUnit, Double totalPrice,
             List<IDiscount> discounts, Double tax) {
         var validator = new Validator();
