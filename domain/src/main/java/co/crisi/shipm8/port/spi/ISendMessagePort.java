@@ -1,7 +1,7 @@
 package co.crisi.shipm8.port.spi;
 
-public interface ISendMessagePort {
+public interface ISendMessagePort<T> {
 
-    void sendMessage(String message);
+    void sendMessage(T message);
 
 }

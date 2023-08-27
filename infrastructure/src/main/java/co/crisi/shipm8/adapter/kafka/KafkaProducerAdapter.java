@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class KafkaProducerAdapter implements ISendMessagePort {
+public class KafkaProducerAdapter implements ISendMessagePort<String> {
 
     private final KafkaTemplate<String, String> kafkaTemplate;
 

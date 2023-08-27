@@ -17,6 +17,7 @@ public class OrderServicePort implements IOrderServicePort {
 
     @Override
     public IOrder save(IOrder entity) {
+        //Everytime it processed the order, will have to send the message it was processed!x
         if (persistencePort.existsById(entity.getId())) {
             throw new RepeatedOrderException(String.format("The order with id %d already exists!", entity.getId()));
         }
