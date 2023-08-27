@@ -3,6 +3,8 @@ package co.crisi.shipm8.service;
 import co.crisi.shipm8.domain.IOrder;
 import co.crisi.shipm8.domain.data.Order;
 import co.crisi.shipm8.domain.data.input.OrderSaveDto;
+import co.crisi.shipm8.domain.event.OrderProcessed;
+import co.crisi.shipm8.domain.event.ProductUpdate;
 import co.crisi.shipm8.exception.business.AddressNotFoundException;
 import co.crisi.shipm8.exception.business.BusinessException;
 import co.crisi.shipm8.exception.business.OrderNotFoundException;
@@ -13,12 +15,11 @@ import co.crisi.shipm8.port.api.IOrderServicePort;
 import co.crisi.shipm8.port.spi.IAddressPersistencePort;
 import co.crisi.shipm8.port.spi.IOrderPersistencePort;
 import co.crisi.shipm8.port.spi.IProductPersistencePort;
+import co.crisi.shipm8.port.spi.ISendMessagePort;
 import co.crisi.shipm8.port.spi.IShopperPersistencePort;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
 import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -32,9 +33,10 @@ public class OrderServicePort implements IOrderServicePort {
 
     private final IShopperPersistencePort shopperPersistencePort;
 
+    private final ISendMessagePort<OrderProcessed> sendMessagePort;
+
     @Override
     public IOrder save(IOrder entity) {
-        //Everytime it processed the order, will have to send the message it was processed!x
         if (persistencePort.existsById(entity.getId())) {
             throw new RepeatedOrderException(String.format("The order with id %d already exists!", entity.getId()));
         }
@@ -73,12 +75,14 @@ public class OrderServicePort implements IOrderServicePort {
 
     @Override
     public IOrder save(OrderSaveDto order) {
-        return (IOrder) validateShippingAddressesExistence(order)
+        return validateShippingAddressesExistence(order)
                 .flatMap(this::validateBillingAddressExistence)
                 .flatMap(this::validateProductsExistence)
                 .flatMap(this::validateShopperExistence)
                 .flatMap(this::createOrder)
-                .fold(Function.identity(), Function.identity());
+                .flatMap(this::saveOrder)
+                .flatMap(this::sendOrderMessage)
+                .fold(this::throwBusinessException, this::foldOrder);
 
     }
 
@@ -144,7 +148,33 @@ public class OrderServicePort implements IOrderServicePort {
                         .build())
                 .toEither()
                 .mapLeft(throwable -> new BusinessException(throwable.getMessage()));
+    }
 
+    private Either<BusinessException, IOrder> saveOrder(Order order) {
+        return Try.of(() -> persistencePort.save(order))
+                .toEither()
+                .mapLeft(throwable -> new BusinessException(throwable.getMessage()));
+    }
+
+    private Either<BusinessException, IOrder> sendOrderMessage(IOrder order) {
+        return Try.of(() -> {
+                    var products = order.getProducts()
+                            .stream()
+                            .map(product -> new ProductUpdate(product.getProductId(), product.getQuantity()))
+                            .toList();
+                    var orderProcessed = new OrderProcessed(products);
+                    sendMessagePort.sendMessage(orderProcessed);
+                    return order;
+                }).toEither()
+                .mapLeft(throwable -> new BusinessException(throwable.getMessage()));
+    }
+
+    private IOrder throwBusinessException(BusinessException e) {
+        throw e;
+    }
+
+    private IOrder foldOrder(IOrder order) {
+        return order;
     }
 
 
