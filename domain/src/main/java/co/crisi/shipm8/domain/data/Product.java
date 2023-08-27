@@ -2,7 +2,6 @@ package co.crisi.shipm8.domain.data;
 
 import co.crisi.shipm8.domain.IDiscount;
 import co.crisi.shipm8.domain.IProduct;
-import co.crisi.shipm8.domain.data.Discount;
 import co.crisi.shipm8.domain.validator.decorator.NonNegativeNumberValidatorDecorator;
 import co.crisi.shipm8.domain.validator.decorator.NonNullValidatorDecorator;
 import co.crisi.shipm8.domain.validator.decorator.Validator;

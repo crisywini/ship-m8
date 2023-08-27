@@ -24,8 +24,9 @@ public class OrderServicePort implements IOrderServicePort {
     }
 
     @Override
-    public Optional<IOrder> getById(Long id) {
-        return persistencePort.findById(id);
+    public IOrder getById(Long id) {
+        return persistencePort.findById(id)
+                .orElseThrow(() -> new OrderNotFoundException(String.format("The order %d was not found!", id)));
     }
 
     @Override

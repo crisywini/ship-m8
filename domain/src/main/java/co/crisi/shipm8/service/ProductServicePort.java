@@ -24,8 +24,9 @@ public class ProductServicePort implements IProductServicePort {
     }
 
     @Override
-    public Optional<IProduct> getById(Long id) {
-        return persistencePort.findById(id);
+    public IProduct getById(Long id) {
+        return persistencePort.findById(id)
+                .orElseThrow(() -> new ProductNotFoundException(String.format("The product %d was not found!", id)));
     }
 
     @Override

@@ -18,16 +18,22 @@ public class DiscountServicePort implements IDiscountServicePort {
 
     @Override
     public IDiscount save(IDiscount entity) {
-        if (persistencePort.existsById(entity.getId())) {
-            throw new RepeatedDiscountException(
-                    String.format("The discount with id %d already exists!", entity.getId()));
-        }
+        var discountId = Optional.ofNullable(entity.getId());
+        discountId.map(id -> {
+            if (persistencePort.existsById(entity.getId())) {
+                throw new RepeatedDiscountException(
+                        String.format("The discount with id %d already exists!", entity.getId()));
+            }
+            return id;
+        });
+
         return persistencePort.save(entity);
     }
 
     @Override
-    public Optional<IDiscount> getById(Long id) {
-        return persistencePort.findById(id);
+    public IDiscount getById(Long id) {
+        return persistencePort.findById(id)
+                .orElseThrow(() -> new DiscountNotFoundException(String.format("The id %d was not found!", id)));
     }
 
     @Override

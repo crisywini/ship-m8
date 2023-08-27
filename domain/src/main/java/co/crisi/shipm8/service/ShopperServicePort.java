@@ -24,8 +24,9 @@ public class ShopperServicePort implements IShopperServicePort {
     }
 
     @Override
-    public Optional<IShopper> getById(Long id) {
-        return persistencePort.findById(id);
+    public IShopper getById(Long id) {
+        return persistencePort.findById(id)
+                .orElseThrow(() -> new ShopperNotFoundException(String.format("The shopper %d was not found!", id)));
     }
 
     @Override

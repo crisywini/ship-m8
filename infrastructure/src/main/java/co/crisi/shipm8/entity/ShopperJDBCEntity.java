@@ -4,6 +4,7 @@ import co.crisi.shipm8.domain.IAddress;
 import co.crisi.shipm8.domain.IOrder;
 import co.crisi.shipm8.domain.IShopper;
 import co.crisi.shipm8.domain.data.Role;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ import org.springframework.data.relational.core.mapping.Table;
 @Table(name = "shopper")
 @AllArgsConstructor
 @NoArgsConstructor
-public class ShopperJDBCEntity implements IShopper {
+public class ShopperJDBCEntity implements Serializable, IShopper {
 
     @Id
     @Column("shopper_id")
@@ -47,7 +48,7 @@ public class ShopperJDBCEntity implements IShopper {
     private String profilePicture;
 
     @MappedCollection(idColumn = "shopper_id", keyColumn = "order_id")
-    private List<IOrder> orders;
+    private List<OrderJDBCEntity> orders;
 
     @MappedCollection(idColumn = "shopper_id", keyColumn = "address_id")
     private List<AddressJDBCEntity> addresses;
