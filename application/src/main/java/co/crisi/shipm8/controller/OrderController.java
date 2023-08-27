@@ -1,6 +1,6 @@
 package co.crisi.shipm8.controller;
 
-import co.crisi.shipm8.domain.data.Order;
+import co.crisi.shipm8.domain.data.input.OrderSaveDto;
 import co.crisi.shipm8.mapper.OrderDtoMapper;
 import co.crisi.shipm8.model.OrderDto;
 import co.crisi.shipm8.port.api.IOrderServicePort;
@@ -28,7 +28,7 @@ public class OrderController {
     @PostMapping
     public ResponseEntity<OrderDto> save(
             @RequestBody
-                    Order order) {
+                    OrderSaveDto order) {
         return new ResponseEntity<>(mapper.map(servicePort.save(order)), HttpStatus.CREATED);
     }
 
