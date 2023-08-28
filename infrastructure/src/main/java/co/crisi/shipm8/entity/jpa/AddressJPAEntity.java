@@ -18,12 +18,13 @@ import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "address")
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Setter
 public class AddressJPAEntity implements IAddress, Serializable {
 
     @Id
@@ -129,6 +130,10 @@ public class AddressJPAEntity implements IAddress, Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    public void setShopper(ShopperJPAEntity shopper) {
+        this.shopper = shopper;
     }
 
 }

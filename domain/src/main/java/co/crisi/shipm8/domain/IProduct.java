@@ -14,7 +14,7 @@ public interface IProduct {
 
     Double getTotalPrice();
 
-    List<IDiscount> getDiscounts();
+    List<? extends IDiscount> getDiscounts();
 
     Double getTax();
 

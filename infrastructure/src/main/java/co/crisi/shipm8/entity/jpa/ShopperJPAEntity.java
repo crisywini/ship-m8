@@ -4,6 +4,7 @@ import co.crisi.shipm8.domain.IAddress;
 import co.crisi.shipm8.domain.IOrder;
 import co.crisi.shipm8.domain.IShopper;
 import co.crisi.shipm8.domain.data.Role;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -27,7 +28,7 @@ import lombok.Setter;
 @Table(name = "shopper")
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Setter
 public class ShopperJPAEntity implements IShopper, Serializable {
 
     @Id
@@ -71,7 +72,7 @@ public class ShopperJPAEntity implements IShopper, Serializable {
     @OneToMany(mappedBy = "shopper")
     private List<OrderJPAEntity> orders = new ArrayList<>();
 
-    @OneToMany(mappedBy = "shopper")
+    @OneToMany(mappedBy = "shopper", cascade = CascadeType.MERGE)
     private List<AddressJPAEntity> addresses = new ArrayList<>();
 
     @Override
@@ -140,13 +141,13 @@ public class ShopperJPAEntity implements IShopper, Serializable {
     }
 
     @Override
-    public List<IOrder> getOrders() {
-        return List.copyOf(orders);
+    public List<OrderJPAEntity> getOrders() {
+        return orders;
     }
 
     @Override
-    public List<IAddress> getAddresses() {
-        return List.copyOf(addresses);
+    public List<AddressJPAEntity> getAddresses() {
+        return addresses;
     }
 
 }

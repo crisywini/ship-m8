@@ -14,13 +14,14 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Entity
 @Table(name = "product")
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Setter
 public class ProductJPAEntity implements IProduct, Serializable {
 
     @Id
@@ -69,8 +70,8 @@ public class ProductJPAEntity implements IProduct, Serializable {
     }
 
     @Override
-    public List<IDiscount> getDiscounts() {
-        return List.copyOf(discounts);
+    public List<DiscountJPAEntity> getDiscounts() {
+        return discounts;
     }
 
     @Override

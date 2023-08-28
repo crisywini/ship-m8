@@ -1,6 +1,7 @@
 package co.crisi.shipm8.adapter.jpa;
 
 import co.crisi.shipm8.domain.IShopper;
+import co.crisi.shipm8.entity.jpa.ShopperJPAEntity;
 import co.crisi.shipm8.mapper.jpa.ShopperJPAMapper;
 import co.crisi.shipm8.port.spi.IShopperPersistencePort;
 import co.crisi.shipm8.repository.jpa.ShopperJPARepository;
@@ -21,7 +22,8 @@ public class ShopperPersistenceJPAAdapter implements IShopperPersistencePort {
 
     @Override
     public IShopper save(IShopper entity) {
-        return repository.save(mapper.map(entity));
+        ShopperJPAEntity map = mapper.map(entity);
+        return repository.save(map);
     }
 
     @Override

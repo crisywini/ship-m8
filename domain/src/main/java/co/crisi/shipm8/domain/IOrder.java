@@ -33,7 +33,7 @@ public interface IOrder {
 
     LocalDate getOrderCompletionDate();
 
-    List<IProduct> getProducts();
+    List<? extends IProduct> getProducts();
 
     IShopper getShopper();
 

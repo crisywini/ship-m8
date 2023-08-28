@@ -26,12 +26,13 @@ import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "order_table")
 @AllArgsConstructor
 @NoArgsConstructor
-@Builder
+@Setter
 public class OrderJPAEntity implements IOrder, Serializable {
 
     @Id
@@ -144,8 +145,8 @@ public class OrderJPAEntity implements IOrder, Serializable {
     }
 
     @Override
-    public List<IProduct> getProducts() {
-        return List.copyOf(products);
+    public List<ProductJPAEntity> getProducts() {
+        return products;
     }
 
     @Override

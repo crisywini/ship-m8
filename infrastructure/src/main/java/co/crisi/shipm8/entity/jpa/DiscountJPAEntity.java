@@ -19,12 +19,13 @@ import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "discount")
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@Setter
 public class DiscountJPAEntity implements IDiscount, Serializable {
 
     @Id
