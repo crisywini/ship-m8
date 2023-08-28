@@ -15,7 +15,7 @@ public class KafkaProducerOrderAdapter implements ISendMessagePort<OrderProcesse
 
     @Override
     public void sendMessage(OrderProcessed message) {
-        kafkaTemplate.send(Topics.THIRD_TOPIC, message);
+        kafkaTemplate.send(Topics.THIRD_TOPIC,message.getKey(), message);
         kafkaTemplate.flush();
     }
 
