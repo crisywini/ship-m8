@@ -1,24 +1,24 @@
-package co.crisi.shipm8.adapter.jdbc;
+package co.crisi.shipm8.adapter.jpa;
 
 import co.crisi.shipm8.domain.IAddress;
-import co.crisi.shipm8.mapper.jdbc.AddressJDBCMapper;
+import co.crisi.shipm8.mapper.jpa.AddressJPAMapper;
 import co.crisi.shipm8.port.spi.IAddressPersistencePort;
-import co.crisi.shipm8.repository.jdbc.AddressJDBCRepository;
+import co.crisi.shipm8.repository.jpa.AddressJPARepository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 @RequiredArgsConstructor
-public class AddressPersistenceJDBCAdapter implements IAddressPersistencePort {
+public class AddressPersistenceJPAAdapter implements IAddressPersistencePort {
 
-    private final AddressJDBCRepository repository;
+    private final AddressJPARepository repository;
 
-    private final AddressJDBCMapper mapper = Mappers.getMapper(AddressJDBCMapper.class);
+    private final AddressJPAMapper mapper = Mappers.getMapper(AddressJPAMapper.class);
 
     @Override
     public IAddress save(IAddress entity) {

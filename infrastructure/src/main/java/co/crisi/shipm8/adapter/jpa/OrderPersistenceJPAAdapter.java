@@ -1,24 +1,24 @@
-package co.crisi.shipm8.adapter.jdbc;
+package co.crisi.shipm8.adapter.jpa;
 
 import co.crisi.shipm8.domain.IOrder;
-import co.crisi.shipm8.entity.jdbc.OrderJDBCEntity;
-import co.crisi.shipm8.mapper.jdbc.OrderJDBCMapper;
+import co.crisi.shipm8.entity.jpa.OrderJPAEntity;
+import co.crisi.shipm8.mapper.jpa.OrderJPAMapper;
 import co.crisi.shipm8.port.spi.IOrderPersistencePort;
-import co.crisi.shipm8.repository.jdbc.OrderJDBCRepository;
+import co.crisi.shipm8.repository.jpa.OrderJPARepository;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 @RequiredArgsConstructor
-public class OrderPersistenceJDBCAdapter implements IOrderPersistencePort {
+public class OrderPersistenceJPAAdapter implements IOrderPersistencePort {
 
-    private final OrderJDBCRepository repository;
+    private final OrderJPARepository repository;
 
-    private final OrderJDBCMapper mapper = Mappers.getMapper(OrderJDBCMapper.class);
+    private final OrderJPAMapper mapper = Mappers.getMapper(OrderJPAMapper.class);
 
     @Override
     public IOrder save(IOrder entity) {
@@ -27,9 +27,8 @@ public class OrderPersistenceJDBCAdapter implements IOrderPersistencePort {
 
     @Override
     public Optional<IOrder> findById(Long id) {
-        Optional<OrderJDBCEntity> order = repository.findById(id);
-        IOrder found = order.orElse(null);
-        return Optional.ofNullable(found);
+        OrderJPAEntity order = repository.findById(id).orElse(null);
+        return Optional.ofNullable(order);
     }
 
     @Override

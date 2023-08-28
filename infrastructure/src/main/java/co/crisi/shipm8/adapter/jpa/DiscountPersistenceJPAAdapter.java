@@ -1,24 +1,24 @@
-package co.crisi.shipm8.adapter.jdbc;
+package co.crisi.shipm8.adapter.jpa;
 
 import co.crisi.shipm8.domain.IDiscount;
-import co.crisi.shipm8.mapper.jdbc.DiscountJDBCMapper;
+import co.crisi.shipm8.mapper.jpa.DiscountJPAMapper;
 import co.crisi.shipm8.port.spi.IDiscountPersistencePort;
-import co.crisi.shipm8.repository.jdbc.DiscountJDBCRepository;
+import co.crisi.shipm8.repository.jpa.DiscountJPARepository;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 @RequiredArgsConstructor
-public class DiscountPersistenceJDBCAdapter implements IDiscountPersistencePort {
+public class DiscountPersistenceJPAAdapter implements IDiscountPersistencePort {
 
-    private final DiscountJDBCRepository repository;
+    private final DiscountJPARepository repository;
 
-    private final DiscountJDBCMapper mapper = Mappers.getMapper(DiscountJDBCMapper.class);
+    private final DiscountJPAMapper mapper = Mappers.getMapper(DiscountJPAMapper.class);
 
     @Override
     public IDiscount save(IDiscount entity) {

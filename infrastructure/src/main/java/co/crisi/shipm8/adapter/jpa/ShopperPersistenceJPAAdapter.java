@@ -1,23 +1,27 @@
-package co.crisi.shipm8.adapter.jdbc;
+package co.crisi.shipm8.adapter.jpa;
 
+import co.crisi.shipm8.domain.IProduct;
 import co.crisi.shipm8.domain.IShopper;
-import co.crisi.shipm8.mapper.jdbc.ShopperJDBCMapper;
+import co.crisi.shipm8.mapper.jpa.ProductJPAMapper;
+import co.crisi.shipm8.mapper.jpa.ShopperJPAMapper;
+import co.crisi.shipm8.port.spi.IProductPersistencePort;
 import co.crisi.shipm8.port.spi.IShopperPersistencePort;
-import co.crisi.shipm8.repository.jdbc.ShopperJDBCRepository;
+import co.crisi.shipm8.repository.jpa.ProductJPARepository;
+import co.crisi.shipm8.repository.jpa.ShopperJPARepository;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 @RequiredArgsConstructor
-public class ShopperPersistenceJDBCAdapter implements IShopperPersistencePort {
+public class ShopperPersistenceJPAAdapter implements IShopperPersistencePort {
 
-    private final ShopperJDBCRepository repository;
+    private final ShopperJPARepository repository;
 
-    private final ShopperJDBCMapper mapper = Mappers.getMapper(ShopperJDBCMapper.class);
+    private final ShopperJPAMapper mapper = Mappers.getMapper(ShopperJPAMapper.class);
 
     @Override
     public IShopper save(IShopper entity) {
@@ -44,5 +48,6 @@ public class ShopperPersistenceJDBCAdapter implements IShopperPersistencePort {
     public boolean existsById(Long id) {
         return repository.existsById(id);
     }
+
 
 }

@@ -1,24 +1,24 @@
-package co.crisi.shipm8.adapter.jdbc;
+package co.crisi.shipm8.adapter.jpa;
 
 import co.crisi.shipm8.domain.IProduct;
 import co.crisi.shipm8.entity.jdbc.ProductJDBCEntity;
-import co.crisi.shipm8.mapper.jdbc.ProductJDBCMapper;
+import co.crisi.shipm8.entity.jpa.ProductJPAEntity;
+import co.crisi.shipm8.mapper.jpa.ProductJPAMapper;
 import co.crisi.shipm8.port.spi.IProductPersistencePort;
-import co.crisi.shipm8.repository.jdbc.ProductJDBCRepository;
+import co.crisi.shipm8.repository.jpa.ProductJPARepository;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
-import org.mapstruct.factory.Mappers;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
-@Component
+@Repository
 @RequiredArgsConstructor
-public class ProductPersistenceJDBCAdapter implements IProductPersistencePort {
+public class ProductPersistenceJPAAdapter implements IProductPersistencePort {
 
-    private final ProductJDBCRepository repository;
+    private final ProductJPARepository repository;
 
-    private final ProductJDBCMapper mapper = Mappers.getMapper(ProductJDBCMapper.class);
+    private final ProductJPAMapper mapper;
 
     @Override
     public IProduct save(IProduct entity) {
@@ -27,9 +27,8 @@ public class ProductPersistenceJDBCAdapter implements IProductPersistencePort {
 
     @Override
     public Optional<IProduct> findById(Long id) {
-        Optional<ProductJDBCEntity> product = repository.findById(id);
-        IProduct found = product.orElse(null);
-        return Optional.ofNullable(found);
+        ProductJPAEntity product = repository.findById(id).orElse(null);
+        return Optional.ofNullable(product);
     }
 
     @Override
