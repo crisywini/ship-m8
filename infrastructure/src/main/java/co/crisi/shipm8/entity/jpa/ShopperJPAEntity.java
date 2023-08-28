@@ -141,12 +141,12 @@ public class ShopperJPAEntity implements IShopper, Serializable {
 
     @Override
     public List<IOrder> getOrders() {
-        return new ArrayList<>(orders);
+        return List.copyOf(orders);
     }
 
     @Override
     public List<IAddress> getAddresses() {
-        return new ArrayList<>(addresses);
+        return List.copyOf(addresses);
     }
 
 }

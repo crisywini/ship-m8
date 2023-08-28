@@ -17,12 +17,14 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "discount")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class DiscountJPAEntity implements IDiscount, Serializable {
 
     @Id

@@ -16,12 +16,14 @@ import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.util.Objects;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "address")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class AddressJPAEntity implements IAddress, Serializable {
 
     @Id

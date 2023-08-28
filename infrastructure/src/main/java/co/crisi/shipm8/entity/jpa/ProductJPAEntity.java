@@ -11,9 +11,16 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.util.List;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 
 @Entity
 @Table(name = "product")
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ProductJPAEntity implements IProduct, Serializable {
 
     @Id
