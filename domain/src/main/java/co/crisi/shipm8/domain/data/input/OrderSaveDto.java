@@ -1,8 +1,10 @@
 package co.crisi.shipm8.domain.data.input;
 
+import co.crisi.shipm8.domain.IProduct;
 import co.crisi.shipm8.domain.data.OrderStatus;
 import co.crisi.shipm8.domain.data.PaymentMethod;
 import co.crisi.shipm8.domain.data.PaymentStatus;
+import co.crisi.shipm8.domain.data.Product;
 import co.crisi.shipm8.domain.data.ShippingMethod;
 import java.time.LocalDate;
 import java.util.List;
@@ -13,5 +15,5 @@ public record OrderSaveDto(LocalDate orderDate, OrderStatus orderStatus, Double 
                            Long shippingAddressId,
                            Long billingAddressId, PaymentMethod paymentMethod, PaymentStatus paymentStatus,
                            ShippingMethod shippingMethod, String orderNotes, String cancellationReason,
-                           LocalDate orderCompletionDate, List<Long> productIds, Long shopperId) {
+                           LocalDate orderCompletionDate, List<IProduct> products, Long shopperId) {
 }

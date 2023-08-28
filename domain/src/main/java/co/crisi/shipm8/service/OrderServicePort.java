@@ -8,7 +8,6 @@ import co.crisi.shipm8.domain.event.ProductUpdate;
 import co.crisi.shipm8.exception.business.AddressNotFoundException;
 import co.crisi.shipm8.exception.business.BusinessException;
 import co.crisi.shipm8.exception.business.OrderNotFoundException;
-import co.crisi.shipm8.exception.business.ProductNotFoundException;
 import co.crisi.shipm8.exception.business.RepeatedOrderException;
 import co.crisi.shipm8.exception.business.ShopperNotFoundException;
 import co.crisi.shipm8.port.api.IOrderServicePort;
@@ -77,7 +76,6 @@ public class OrderServicePort implements IOrderServicePort {
     public IOrder save(OrderSaveDto order) {
         return validateShippingAddressesExistence(order)
                 .flatMap(this::validateBillingAddressExistence)
-                .flatMap(this::validateProductsExistence)
                 .flatMap(this::validateShopperExistence)
                 .flatMap(this::createOrder)
                 .flatMap(this::saveOrder)
@@ -102,18 +100,6 @@ public class OrderServicePort implements IOrderServicePort {
         return Either.right(order);
     }
 
-    private Either<BusinessException, OrderSaveDto> validateProductsExistence(OrderSaveDto order) {
-        var nonExistentIds = order.productIds()
-                .stream()
-                .filter(id -> !productPersistencePort.existsById(id))
-                .toList();
-        if (!nonExistentIds.isEmpty()) {
-            return Either.left(new ProductNotFoundException(
-                    "The product ids " + nonExistentIds + " were not found!"));
-        }
-
-        return Either.right(order);
-    }
 
     private Either<BusinessException, OrderSaveDto> validateShopperExistence(OrderSaveDto order) {
         return !shopperPersistencePort.existsById(order.shopperId())
@@ -127,9 +113,6 @@ public class OrderServicePort implements IOrderServicePort {
         var shippingAddress = addressPersistencePort.findById(order.shippingAddressId()).orElseThrow();
         var billingAddress = addressPersistencePort.findById(order.billingAddressId()).orElseThrow();
         var shopper = shopperPersistencePort.findById(order.shopperId()).orElseThrow();
-        var products = order.productIds().stream()
-                .map(id -> productPersistencePort.findById(id).orElseThrow())
-                .toList();
 
         return Try.of(() -> Order.builder()
                         .billingAddress(billingAddress)
@@ -141,7 +124,7 @@ public class OrderServicePort implements IOrderServicePort {
                         .orderCompletionDate(order.orderCompletionDate())
                         .paymentMethod(order.paymentMethod())
                         .paymentStatus(order.paymentStatus())
-                        .products(products)
+                        .products(order.products())
                         .shippingMethod(order.shippingMethod())
                         .shopper(shopper)
                         .totalPrice(order.totalPrice())
