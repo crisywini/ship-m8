@@ -49,7 +49,7 @@ public class DiscountJPAEntity implements IDiscount, Serializable {
     private Integer minimumOrderAmount;
 
     @ManyToOne
-    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
+    @JoinColumn(name = "product_id", referencedColumnName = "id")
     private ProductJPAEntity product;
 
     @Override

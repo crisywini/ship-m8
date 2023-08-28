@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import org.mapstruct.factory.Mappers;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -18,7 +19,7 @@ public class ProductPersistenceJPAAdapter implements IProductPersistencePort {
 
     private final ProductJPARepository repository;
 
-    private final ProductJPAMapper mapper;
+    private final ProductJPAMapper mapper = Mappers.getMapper(ProductJPAMapper.class);
 
     @Override
     public IProduct save(IProduct entity) {

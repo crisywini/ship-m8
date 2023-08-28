@@ -1,12 +1,8 @@
 package co.crisi.shipm8.adapter.jpa;
 
-import co.crisi.shipm8.domain.IProduct;
 import co.crisi.shipm8.domain.IShopper;
-import co.crisi.shipm8.mapper.jpa.ProductJPAMapper;
 import co.crisi.shipm8.mapper.jpa.ShopperJPAMapper;
-import co.crisi.shipm8.port.spi.IProductPersistencePort;
 import co.crisi.shipm8.port.spi.IShopperPersistencePort;
-import co.crisi.shipm8.repository.jpa.ProductJPARepository;
 import co.crisi.shipm8.repository.jpa.ShopperJPARepository;
 import java.util.Collection;
 import java.util.List;

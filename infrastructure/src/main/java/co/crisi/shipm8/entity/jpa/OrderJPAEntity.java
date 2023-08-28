@@ -27,7 +27,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "order")
+@Table(name = "order_table")
 @AllArgsConstructor
 @NoArgsConstructor
 public class OrderJPAEntity implements IOrder, Serializable {
@@ -46,18 +46,18 @@ public class OrderJPAEntity implements IOrder, Serializable {
     private Double totalPrice;
 
     @OneToOne
-    @JoinColumn(name = "shipping_address_id", referencedColumnName = "address_id")
+    @JoinColumn(name = "shipping_address_id", referencedColumnName = "id")
     private AddressJPAEntity shippingAddress;
 
     @OneToOne
-    @JoinColumn(name = "billing_address_id", referencedColumnName = "address_id")
+    @JoinColumn(name = "billing_address_id", referencedColumnName = "id")
     private AddressJPAEntity billingAddress;
 
     @Column(name = "payment_method")
     @Enumerated(EnumType.STRING)
     private PaymentMethod paymentMethod;
 
-    @Column(name = "payment_method")
+    @Column(name = "payment_status")
     @Enumerated(EnumType.STRING)
     private PaymentStatus paymentStatus;
 

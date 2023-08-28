@@ -8,6 +8,7 @@ import co.crisi.shipm8.port.spi.IProductPersistencePort;
 import co.crisi.shipm8.port.spi.ISendMessagePort;
 import co.crisi.shipm8.port.spi.IShopperPersistencePort;
 import co.crisi.shipm8.service.OrderServicePort;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -16,9 +17,15 @@ public class OrderBeanConfig {
 
 
     @Bean
-    public IOrderServicePort orderServicePort(IOrderPersistencePort persistencePort,
-            IAddressPersistencePort addressPersistencePort, IProductPersistencePort productPersistencePort,
-            IShopperPersistencePort shopperPersistencePort, ISendMessagePort<OrderProcessed> sendMessagePort) {
+    public IOrderServicePort orderServicePort(
+            @Qualifier("orderPersistenceJPAAdapter")
+                    IOrderPersistencePort persistencePort,
+            @Qualifier("addressPersistenceJPAAdapter")
+                    IAddressPersistencePort addressPersistencePort,
+            @Qualifier("productPersistenceJPAAdapter")
+                    IProductPersistencePort productPersistencePort,
+            @Qualifier("shopperPersistenceJPAAdapter")
+                    IShopperPersistencePort shopperPersistencePort, ISendMessagePort<OrderProcessed> sendMessagePort) {
         return new OrderServicePort(persistencePort, addressPersistencePort, productPersistencePort,
                 shopperPersistencePort, sendMessagePort);
     }
