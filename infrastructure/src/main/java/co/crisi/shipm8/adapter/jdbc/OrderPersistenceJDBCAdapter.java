@@ -1,7 +1,7 @@
 package co.crisi.shipm8.adapter.jdbc;
 
 import co.crisi.shipm8.domain.IOrder;
-import co.crisi.shipm8.entity.OrderJDBCEntity;
+import co.crisi.shipm8.entity.jdbc.OrderJDBCEntity;
 import co.crisi.shipm8.mapper.OrderMapper;
 import co.crisi.shipm8.port.spi.IOrderPersistencePort;
 import co.crisi.shipm8.repository.jdbc.OrderJDBCRepository;

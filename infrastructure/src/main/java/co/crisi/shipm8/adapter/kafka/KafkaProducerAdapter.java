@@ -7,7 +7,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Component;
 
 @Slf4j
-@Component
+//Component
 @RequiredArgsConstructor
 public class KafkaProducerAdapter implements ISendMessagePort<String> {
 

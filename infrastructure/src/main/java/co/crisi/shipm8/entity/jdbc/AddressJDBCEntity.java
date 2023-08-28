@@ -1,4 +1,4 @@
-package co.crisi.shipm8.entity;
+package co.crisi.shipm8.entity.jdbc;
 
 import co.crisi.shipm8.domain.IAddress;
 import co.crisi.shipm8.domain.IShopper;

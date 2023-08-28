@@ -1,7 +1,6 @@
-package co.crisi.shipm8.entity;
+package co.crisi.shipm8.entity.jdbc;
 
 import co.crisi.shipm8.domain.IDiscount;
-import co.crisi.shipm8.domain.IOrder;
 import co.crisi.shipm8.domain.IProduct;
 import java.io.Serializable;
 import java.util.List;
@@ -35,8 +34,6 @@ public class ProductJDBCEntity implements Serializable, IProduct {
     private List<DiscountJDBCEntity> discounts;
 
     private Double tax;
-
-    private OrderJDBCEntity order;
 
     @Override
     public Long getId() {
@@ -73,8 +70,5 @@ public class ProductJDBCEntity implements Serializable, IProduct {
         return tax;
     }
 
-    public IOrder getOrder() {
-        return order;
-    }
 
 }

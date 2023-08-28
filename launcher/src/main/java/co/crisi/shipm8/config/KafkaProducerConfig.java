@@ -1,5 +1,6 @@
 package co.crisi.shipm8.config;
 
+import co.crisi.shipm8.domain.event.OrderProcessed;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.kafka.clients.producer.ProducerConfig;
@@ -34,12 +35,12 @@ public class KafkaProducerConfig {
     }
 
     @Bean
-    public ProducerFactory<String, String> producerFactory() {
+    public ProducerFactory<String, OrderProcessed> producerFactory() {
         return new DefaultKafkaProducerFactory<>(producerConfigs());
     }
 
     @Bean
-    public KafkaTemplate<String, String> kafkaTemplate() {
+    public KafkaTemplate<String, OrderProcessed> kafkaTemplate() {
         return new KafkaTemplate<>(producerFactory());
     }
 

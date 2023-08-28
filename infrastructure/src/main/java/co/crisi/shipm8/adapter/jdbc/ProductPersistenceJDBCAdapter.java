@@ -1,7 +1,7 @@
 package co.crisi.shipm8.adapter.jdbc;
 
 import co.crisi.shipm8.domain.IProduct;
-import co.crisi.shipm8.entity.ProductJDBCEntity;
+import co.crisi.shipm8.entity.jdbc.ProductJDBCEntity;
 import co.crisi.shipm8.mapper.ProductMapper;
 import co.crisi.shipm8.port.spi.IProductPersistencePort;
 import co.crisi.shipm8.repository.jdbc.ProductJDBCRepository;

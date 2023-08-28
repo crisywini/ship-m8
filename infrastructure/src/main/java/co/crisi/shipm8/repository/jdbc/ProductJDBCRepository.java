@@ -1,6 +1,6 @@
 package co.crisi.shipm8.repository.jdbc;
 
-import co.crisi.shipm8.entity.ProductJDBCEntity;
+import co.crisi.shipm8.entity.jdbc.ProductJDBCEntity;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
