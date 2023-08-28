@@ -9,16 +9,19 @@ import co.crisi.shipm8.domain.validator.decorator.NonNullValidatorDecorator;
 import co.crisi.shipm8.domain.validator.decorator.Validator;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 public record Shopper(Long id, String firstName, String lastName, String email,
                       String password, String phoneNumber, LocalDate dateOfBirth,
                       String gender, LocalDate registrationDate,
                       LocalDate lastLoginDate, Role role, Boolean activeStatus,
-                      String profilePicture, List<IOrder> orders, List<IAddress> addresses) implements IShopper {
+                      String profilePicture, List<Order> orders, List<Address> addresses) implements IShopper {
 
     public Shopper(Long id, String firstName, String lastName, String email, String password, String phoneNumber,
             LocalDate dateOfBirth, String gender, LocalDate registrationDate, LocalDate lastLoginDate, Role role,
-            Boolean activeStatus, String profilePicture, List<IOrder> orders, List<IAddress> addresses) {
+            Boolean activeStatus, String profilePicture, List<Order> orders, List<Address> addresses) {
         var validator = new Validator();
         var nonNullValidator = new NonNullValidatorDecorator(validator);
         var nonEmptyStringValidator = new NonEmptyValidatorDecorator(nonNullValidator);
@@ -107,12 +110,16 @@ public record Shopper(Long id, String firstName, String lastName, String email,
 
     @Override
     public List<IOrder> getOrders() {
-        return orders;
+        return Optional.ofNullable(orders)
+                .map(e -> e.stream().map(IOrder.class::cast).collect(Collectors.toList()))
+                .orElse(null);
     }
 
     @Override
     public List<IAddress> getAddresses() {
-        return addresses;
+        return Optional.ofNullable(addresses)
+                .map(e -> e.stream().map(IAddress.class::cast).collect(Collectors.toList()))
+                .orElse(null);
     }
 
 }

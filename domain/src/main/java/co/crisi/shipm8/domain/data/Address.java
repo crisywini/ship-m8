@@ -20,7 +20,7 @@ public record Address(Long id, IShopper shopper, String recipientName, String st
         var nonNullValidator = new NonNullValidatorDecorator(validator);
         var nonEmptyValidator = new NonEmptyValidatorDecorator(nonNullValidator);
         this.id = id;
-        this.shopper = nonNullValidator.validate(shopper, "shopper");
+        this.shopper = shopper;
         this.recipientName = nonEmptyValidator.validate(recipientName, "recipient name");
         this.streetAddress = nonEmptyValidator.validate(streetAddress, "street address");
         this.city = nonEmptyValidator.validate(city, "city");

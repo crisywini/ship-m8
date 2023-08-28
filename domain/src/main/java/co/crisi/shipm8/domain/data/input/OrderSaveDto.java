@@ -1,6 +1,5 @@
 package co.crisi.shipm8.domain.data.input;
 
-import co.crisi.shipm8.domain.IProduct;
 import co.crisi.shipm8.domain.data.OrderStatus;
 import co.crisi.shipm8.domain.data.PaymentMethod;
 import co.crisi.shipm8.domain.data.PaymentStatus;
@@ -15,5 +14,5 @@ public record OrderSaveDto(LocalDate orderDate, OrderStatus orderStatus, Double 
                            Long shippingAddressId,
                            Long billingAddressId, PaymentMethod paymentMethod, PaymentStatus paymentStatus,
                            ShippingMethod shippingMethod, String orderNotes, String cancellationReason,
-                           LocalDate orderCompletionDate, List<IProduct> products, Long shopperId) {
+                           LocalDate orderCompletionDate, List<Product> products, Long shopperId) {
 }

@@ -1,6 +1,7 @@
 package co.crisi.shipm8.service;
 
 import co.crisi.shipm8.domain.IOrder;
+import co.crisi.shipm8.domain.IProduct;
 import co.crisi.shipm8.domain.data.Order;
 import co.crisi.shipm8.domain.data.input.OrderSaveDto;
 import co.crisi.shipm8.domain.event.OrderProcessed;
@@ -113,6 +114,9 @@ public class OrderServicePort implements IOrderServicePort {
         var shippingAddress = addressPersistencePort.findById(order.shippingAddressId()).orElseThrow();
         var billingAddress = addressPersistencePort.findById(order.billingAddressId()).orElseThrow();
         var shopper = shopperPersistencePort.findById(order.shopperId()).orElseThrow();
+        List<IProduct> products = order.products().stream()
+                .map(product -> (IProduct) product)
+                .toList();
 
         return Try.of(() -> Order.builder()
                         .billingAddress(billingAddress)
@@ -124,7 +128,7 @@ public class OrderServicePort implements IOrderServicePort {
                         .orderCompletionDate(order.orderCompletionDate())
                         .paymentMethod(order.paymentMethod())
                         .paymentStatus(order.paymentStatus())
-                        .products(order.products())
+                        .products(products)
                         .shippingMethod(order.shippingMethod())
                         .shopper(shopper)
                         .totalPrice(order.totalPrice())

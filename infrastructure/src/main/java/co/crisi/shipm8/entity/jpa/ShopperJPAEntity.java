@@ -15,14 +15,19 @@ import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table(name = "shopper")
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ShopperJPAEntity implements IShopper, Serializable {
 
     @Id
@@ -64,10 +69,10 @@ public class ShopperJPAEntity implements IShopper, Serializable {
     private String profilePicture;
 
     @OneToMany(mappedBy = "shopper")
-    private List<OrderJPAEntity> orders;
+    private List<OrderJPAEntity> orders = new ArrayList<>();
 
     @OneToMany(mappedBy = "shopper")
-    private List<AddressJPAEntity> addresses;
+    private List<AddressJPAEntity> addresses = new ArrayList<>();
 
     @Override
     public Long getId() {
@@ -136,12 +141,12 @@ public class ShopperJPAEntity implements IShopper, Serializable {
 
     @Override
     public List<IOrder> getOrders() {
-        return List.copyOf(orders);
+        return new ArrayList<>(orders);
     }
 
     @Override
     public List<IAddress> getAddresses() {
-        return List.copyOf(addresses);
+        return new ArrayList<>(addresses);
     }
 
 }
