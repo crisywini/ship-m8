@@ -20,6 +20,7 @@ import co.crisi.shipm8.port.spi.IShopperPersistencePort;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
@@ -116,7 +117,7 @@ public class OrderServicePort implements IOrderServicePort {
         var shopper = shopperPersistencePort.findById(order.shopperId()).orElseThrow();
         List<IProduct> products = order.products().stream()
                 .map(product -> (IProduct) product)
-                .toList();
+                .collect(Collectors.toList());
 
         return Try.of(() -> Order.builder()
                         .billingAddress(billingAddress)
