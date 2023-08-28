@@ -1,7 +1,7 @@
 package co.crisi.shipm8.adapter.jdbc;
 
 import co.crisi.shipm8.domain.IDiscount;
-import co.crisi.shipm8.mapper.DiscountMapper;
+import co.crisi.shipm8.mapper.jdbc.DiscountJDBCMapper;
 import co.crisi.shipm8.port.spi.IDiscountPersistencePort;
 import co.crisi.shipm8.repository.jdbc.DiscountJDBCRepository;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class DiscountPersistenceJDBCAdapter implements IDiscountPersistencePort 
 
     private final DiscountJDBCRepository repository;
 
-    private final DiscountMapper mapper = Mappers.getMapper(DiscountMapper.class);
+    private final DiscountJDBCMapper mapper = Mappers.getMapper(DiscountJDBCMapper.class);
 
     @Override
     public IDiscount save(IDiscount entity) {

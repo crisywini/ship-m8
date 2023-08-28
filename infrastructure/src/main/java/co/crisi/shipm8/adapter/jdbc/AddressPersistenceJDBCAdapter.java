@@ -1,7 +1,7 @@
 package co.crisi.shipm8.adapter.jdbc;
 
 import co.crisi.shipm8.domain.IAddress;
-import co.crisi.shipm8.mapper.AddressMapper;
+import co.crisi.shipm8.mapper.jdbc.AddressJDBCMapper;
 import co.crisi.shipm8.port.spi.IAddressPersistencePort;
 import co.crisi.shipm8.repository.jdbc.AddressJDBCRepository;
 import java.util.ArrayList;
@@ -18,7 +18,7 @@ public class AddressPersistenceJDBCAdapter implements IAddressPersistencePort {
 
     private final AddressJDBCRepository repository;
 
-    private final AddressMapper mapper = Mappers.getMapper(AddressMapper.class);
+    private final AddressJDBCMapper mapper = Mappers.getMapper(AddressJDBCMapper.class);
 
     @Override
     public IAddress save(IAddress entity) {

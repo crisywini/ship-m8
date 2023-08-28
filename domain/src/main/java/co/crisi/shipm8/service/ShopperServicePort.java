@@ -17,8 +17,8 @@ public class ShopperServicePort implements IShopperServicePort {
 
     @Override
     public IShopper save(IShopper entity) {
-        if (!persistencePort.existsById(entity.getId())) {
-            throw new RepeatedProductException(String.format("The product with id %d already exists!", entity.getId()));
+        if (persistencePort.existsById(entity.getId())) {
+            throw new RepeatedProductException(String.format("The shopper with id %d already exists!", entity.getId()));
         }
         return persistencePort.save(entity);
     }

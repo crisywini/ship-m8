@@ -1,110 +1,35 @@
--- Create tables
+create table address (primary_address boolean, id bigserial not null, shopper_id bigint,
+ city varchar(255), country varchar(255), phone_number varchar(255), postal_code varchar(255),
+ recipient_name varchar(255), state_province_region varchar(255), street_address varchar(255),
+  type varchar(255) check (type in ('PRIMARY','SHIPPING','BILLING')), primary key (id));
 
--- Shopper Table
-CREATE TABLE IF NOT EXISTS shopper (
-    shopper_id BIGSERIAL PRIMARY KEY,
-    first_name VARCHAR(255),
-    last_name VARCHAR(255),
-    email VARCHAR(255),
-    password VARCHAR(255),
-    phone_number VARCHAR(20),
-    date_of_birth DATE,
-    gender VARCHAR(10),
-    registration_date DATE,
-    last_login_date DATE,
-    role VARCHAR(255),
-    active_status BOOLEAN,
-    profile_picture VARCHAR(255)
-);
+create table discount (end_date date, minimum_order_amount integer, start_date date, value float(53),
+id bigserial not null, product_id bigint,
+applicability varchar(255) check (applicability in ('ORDERS','PRODUCTS','BOTH')),
+ name varchar(255), type varchar(255) check (type in ('PERCENTAGE_OFF','FIXED_AMOUNT_OFF','BUY_ONE_GET_ONE_FREE')),
+  primary key (id));
 
--- Address Table
-CREATE TABLE IF NOT EXISTS address (
-    address_id BIGSERIAL PRIMARY KEY,
-    shopper_id BIGINT,
-    recipient_name VARCHAR(255),
-    street_address VARCHAR(255),
-    city VARCHAR(255),
-    state_province_region VARCHAR(255),
-    postal_code VARCHAR(255),
-    country VARCHAR(255),
-    phone_number VARCHAR(255),
-    type VARCHAR(255),
-    primary_address BOOLEAN,
-    FOREIGN KEY (shopper_id) REFERENCES shopper(shopper_id)
-    );
 
--- Discount Table
-CREATE TABLE IF NOT EXISTS discount (
-    discount_id BIGSERIAL PRIMARY KEY,
-    name VARCHAR(255),
-    value DOUBLE PRECISION,
-    type VARCHAR(255),
-    start_date DATE,
-    end_date DATE,
-    applicability VARCHAR(255),
-    minimum_order_amount INTEGER
-);
+create table order_table (order_completion_date date, order_date date, total_price float(53),
+billing_address_id bigint, id bigserial not null, shipping_address_id bigint,
+ shopper_id bigint, cancellation_reason varchar(255), order_notes varchar(255),
+ payment_method varchar(255) check (payment_method in ('CREDIT_CARD','PAY_PAL')),
+  payment_status varchar(255) check (payment_status in ('PENDING','SUCCESSFUL','FAILED')),
+  shipping_method varchar(255) check (shipping_method in ('STANDARD','EXPRESS')),
+  status varchar(255) check (status in ('PENDING','PROCESSING','SHIPPING','DELIVERED','CANCELED')), primary key (id));
 
--- Order Table
-CREATE TABLE IF NOT EXISTS "order" (
-    order_id BIGSERIAL PRIMARY KEY,
-    order_date DATE,
-    status VARCHAR(255),
-    total_price DOUBLE PRECISION,
-    shipping_address_id BIGINT,
-    billing_address_id BIGINT,
-    payment_method VARCHAR(255),
-    payment_status VARCHAR(255),
-    shipping_method VARCHAR(255),
-    order_notes TEXT,
-    cancellation_reason TEXT,
-    order_completion_date DATE,
-    shopper_id BIGINT,
-    FOREIGN KEY (shipping_address_id) REFERENCES address(address_id),
-    FOREIGN KEY (billing_address_id) REFERENCES address(address_id),
-    FOREIGN KEY (shopper_id) REFERENCES shopper(shopper_id)
-);
+create table product (price_per_unit float(53), quantity integer, tax float(53), total_price float(53),
+ id bigserial not null, og_product_id bigint, order_id bigint, primary key (id));
 
--- Product Table
-CREATE TABLE IF NOT EXISTS product (
-    product_id BIGSERIAL PRIMARY KEY,
-    og_product_id BIGINT,
-    quantity INTEGER,
-    price_per_unit DOUBLE PRECISION,
-    total_price DOUBLE PRECISION,
-    tax DOUBLE PRECISION,
-    order_id BIGINT,
-    FOREIGN KEY (order_id) REFERENCES "order"(order_id)
-);
+create table shopper (active_status boolean, date_of_birth date, last_login_date date,
+ registration_date date, shopper_id bigserial not null, email varchar(255),
+  first_name varchar(255), gender varchar(255), last_name varchar(255), password varchar(255),
+  phone_number varchar(255), profile_picture varchar(255),
+   role varchar(255) check (role in ('CUSTOMER','ADMIN','SELLER')), primary key (shopper_id));
 
--- Create M2M relationship tables
-
--- Address-Order M2M Table
-CREATE TABLE IF NOT EXISTS address_order (
-    address_id BIGINT,
-    order_id BIGINT,
-    FOREIGN KEY (address_id) REFERENCES address(address_id),
-    FOREIGN KEY (order_id) REFERENCES "order"(order_id)
-    );
-
--- Product-Discount M2M Table
-CREATE TABLE IF NOT EXISTS product_discount (
-    product_id BIGINT,
-    discount_id BIGINT,
-    FOREIGN KEY (product_id) REFERENCES product(product_id),
-    FOREIGN KEY (discount_id) REFERENCES discount(discount_id)
-    );
-
--- Shopper-Order M2M Table
-CREATE TABLE IF NOT EXISTS shopper_order (
-    shopper_id BIGINT,
-    order_id BIGINT,
-    FOREIGN KEY (shopper_id) REFERENCES shopper(shopper_id),
-    FOREIGN KEY (order_id) REFERENCES "order"(order_id)
-);
-
--- Add unique constraints to M2M tables
-
-ALTER TABLE address_order ADD CONSTRAINT uk_address_order UNIQUE (address_id, order_id);
-ALTER TABLE product_discount ADD CONSTRAINT uk_product_discount UNIQUE (product_id, discount_id);
-ALTER TABLE shopper_order ADD CONSTRAINT uk_shopper_order UNIQUE (shopper_id, order_id);
+alter table if exists address add constraint FK80g6mrohbud77c0u34uqe8kve foreign key (shopper_id) references shopper;
+alter table if exists discount add constraint FK9qcsopl406ufumbitfi9u7jop foreign key (product_id) references product;
+alter table if exists order_table add constraint FKnj3xwbi7c4g4h97qe4jutun3x foreign key (billing_address_id) references address;
+alter table if exists order_table add constraint FKfksdrldj2xk6eqtmi8bx9j485 foreign key (shipping_address_id) references address;
+alter table if exists order_table add constraint FKq923m2nw5nc2n92owjw6mek2v foreign key (shopper_id) references shopper;
+alter table if exists product add constraint FKhe4w1npbt3uwe9levt6rbm32o foreign key (order_id) references order_table;

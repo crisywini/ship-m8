@@ -11,12 +11,14 @@ import co.crisi.shipm8.domain.validator.decorator.NonNullValidatorDecorator;
 import co.crisi.shipm8.domain.validator.decorator.Validator;
 import java.time.LocalDate;
 import java.util.List;
+import lombok.Builder;
 
 public record Order(Long id, LocalDate orderDate, OrderStatus orderStatus, Double totalPrice, IAddress shippingAddress,
                     IAddress billingAddress, PaymentMethod paymentMethod, PaymentStatus paymentStatus,
                     ShippingMethod shippingMethod, String orderNotes, String cancellationReason,
                     LocalDate orderCompletionDate, List<IProduct> products, IShopper shopper) implements IOrder {
 
+    @Builder
     public Order(Long id, LocalDate orderDate, OrderStatus orderStatus, Double totalPrice, IAddress shippingAddress,
             IAddress billingAddress, PaymentMethod paymentMethod, PaymentStatus paymentStatus,
             ShippingMethod shippingMethod,

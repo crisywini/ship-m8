@@ -1,57 +1,79 @@
-package co.crisi.shipm8.entity;
+package co.crisi.shipm8.entity.jpa;
 
 import co.crisi.shipm8.domain.IAddress;
 import co.crisi.shipm8.domain.IOrder;
 import co.crisi.shipm8.domain.IShopper;
 import co.crisi.shipm8.domain.data.Role;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.MappedCollection;
-import org.springframework.data.relational.core.mapping.Table;
+import lombok.Setter;
 
+@Entity
 @Table(name = "shopper")
-@AllArgsConstructor
 @NoArgsConstructor
-public class ShopperJDBCEntity implements Serializable, IShopper {
+@AllArgsConstructor
+@Setter
+public class ShopperJPAEntity implements IShopper, Serializable {
 
     @Id
-    @Column("shopper_id")
+    @Column(name = "shopper_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "first_name")
     private String firstName;
 
+    @Column(name = "last_name")
     private String lastName;
 
     private String email;
 
     private String password;
 
+    @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
 
     private String gender;
 
+    @Column(name = "registration_date")
     private LocalDate registrationDate;
 
+    @Column(name = "last_login_date")
     private LocalDate lastLoginDate;
 
+    @Enumerated(EnumType.STRING)
     private Role role;
 
+    @Column(name = "active_status")
     private Boolean activeStatus;
 
+    @Column(name = "profile_picture")
     private String profilePicture;
 
-    @MappedCollection(idColumn = "shopper_id", keyColumn = "order_id")
-    private List<OrderJDBCEntity> orders;
+    @OneToMany(mappedBy = "shopper")
+    private List<OrderJPAEntity> orders = new ArrayList<>();
 
-    @MappedCollection(idColumn = "shopper_id", keyColumn = "address_id")
-    private List<AddressJDBCEntity> addresses;
+    @OneToMany(mappedBy = "shopper", cascade = CascadeType.MERGE)
+    private List<AddressJPAEntity> addresses = new ArrayList<>();
 
     @Override
     public Long getId() {
@@ -119,13 +141,13 @@ public class ShopperJDBCEntity implements Serializable, IShopper {
     }
 
     @Override
-    public List<IOrder> getOrders() {
-        return List.copyOf(orders);
+    public List<OrderJPAEntity> getOrders() {
+        return orders;
     }
 
     @Override
-    public List<IAddress> getAddresses() {
-        return List.copyOf(addresses);
+    public List<AddressJPAEntity> getAddresses() {
+        return addresses;
     }
 
 }

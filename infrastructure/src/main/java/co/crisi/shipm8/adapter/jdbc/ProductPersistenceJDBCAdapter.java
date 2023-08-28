@@ -1,8 +1,8 @@
 package co.crisi.shipm8.adapter.jdbc;
 
 import co.crisi.shipm8.domain.IProduct;
-import co.crisi.shipm8.entity.ProductJDBCEntity;
-import co.crisi.shipm8.mapper.ProductMapper;
+import co.crisi.shipm8.entity.jdbc.ProductJDBCEntity;
+import co.crisi.shipm8.mapper.jdbc.ProductJDBCMapper;
 import co.crisi.shipm8.port.spi.IProductPersistencePort;
 import co.crisi.shipm8.repository.jdbc.ProductJDBCRepository;
 import java.util.Collection;
@@ -18,7 +18,7 @@ public class ProductPersistenceJDBCAdapter implements IProductPersistencePort {
 
     private final ProductJDBCRepository repository;
 
-    private final ProductMapper mapper = Mappers.getMapper(ProductMapper.class);
+    private final ProductJDBCMapper mapper = Mappers.getMapper(ProductJDBCMapper.class);
 
     @Override
     public IProduct save(IProduct entity) {

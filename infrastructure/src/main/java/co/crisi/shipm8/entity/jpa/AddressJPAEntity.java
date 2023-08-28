@@ -1,45 +1,64 @@
-package co.crisi.shipm8.entity;
+package co.crisi.shipm8.entity.jpa;
 
 import co.crisi.shipm8.domain.IAddress;
 import co.crisi.shipm8.domain.IShopper;
 import co.crisi.shipm8.domain.data.AddressType;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
 import java.io.Serializable;
+import java.util.Objects;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
-import org.springframework.data.relational.core.mapping.Table;
+import lombok.Setter;
 
+@Entity
+@Table(name = "address")
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "address")
-@Builder
-public class AddressJDBCEntity implements Serializable, IAddress {
+@Setter
+public class AddressJPAEntity implements IAddress, Serializable {
 
     @Id
-    @Column("address_id")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private ShopperJDBCEntity shopper;
+    @ManyToOne
+    @JoinColumn(name = "shopper_id")
+    private ShopperJPAEntity shopper;
 
+    @Column(name = "recipient_name")
     private String recipientName;
 
+    @Column(name = "street_address")
     private String streetAddress;
 
     private String city;
 
+    @Column(name = "state_province_region")
     private String stateProvinceRegion;
 
+    @Column(name = "postal_code")
     private String postalCode;
 
     private String country;
 
+    @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Enumerated(EnumType.STRING)
     private AddressType type;
 
-    private Boolean primaryAddress;
+    @Column(name = "primary_address")
+    private boolean primaryAddress;
 
     @Override
     public Long getId() {
@@ -94,6 +113,27 @@ public class AddressJDBCEntity implements Serializable, IAddress {
     @Override
     public Boolean isPrimaryAddress() {
         return primaryAddress;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        AddressJPAEntity that = (AddressJPAEntity) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+
+    public void setShopper(ShopperJPAEntity shopper) {
+        this.shopper = shopper;
     }
 
 }

@@ -1,8 +1,8 @@
 package co.crisi.shipm8.adapter.jdbc;
 
 import co.crisi.shipm8.domain.IOrder;
-import co.crisi.shipm8.entity.OrderJDBCEntity;
-import co.crisi.shipm8.mapper.OrderMapper;
+import co.crisi.shipm8.entity.jdbc.OrderJDBCEntity;
+import co.crisi.shipm8.mapper.jdbc.OrderJDBCMapper;
 import co.crisi.shipm8.port.spi.IOrderPersistencePort;
 import co.crisi.shipm8.repository.jdbc.OrderJDBCRepository;
 import java.util.Collection;
@@ -18,7 +18,7 @@ public class OrderPersistenceJDBCAdapter implements IOrderPersistencePort {
 
     private final OrderJDBCRepository repository;
 
-    private final OrderMapper mapper = Mappers.getMapper(OrderMapper.class);
+    private final OrderJDBCMapper mapper = Mappers.getMapper(OrderJDBCMapper.class);
 
     @Override
     public IOrder save(IOrder entity) {

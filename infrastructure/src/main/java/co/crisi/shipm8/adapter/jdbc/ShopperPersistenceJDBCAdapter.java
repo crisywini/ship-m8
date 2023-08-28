@@ -1,7 +1,7 @@
 package co.crisi.shipm8.adapter.jdbc;
 
 import co.crisi.shipm8.domain.IShopper;
-import co.crisi.shipm8.mapper.ShopperMapper;
+import co.crisi.shipm8.mapper.jdbc.ShopperJDBCMapper;
 import co.crisi.shipm8.port.spi.IShopperPersistencePort;
 import co.crisi.shipm8.repository.jdbc.ShopperJDBCRepository;
 import java.util.Collection;
@@ -17,7 +17,7 @@ public class ShopperPersistenceJDBCAdapter implements IShopperPersistencePort {
 
     private final ShopperJDBCRepository repository;
 
-    private final ShopperMapper mapper = Mappers.getMapper(ShopperMapper.class);
+    private final ShopperJDBCMapper mapper = Mappers.getMapper(ShopperJDBCMapper.class);
 
     @Override
     public IShopper save(IShopper entity) {
