@@ -1,13 +1,16 @@
 package co.crisi.shipm8.domain.event;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.List;
-
+@JsonIgnoreProperties(ignoreUnknown = true)
 public class OrderProcessed extends Message<OrderDto> {
 
     private final OrderDto order;
 
-    public OrderProcessed(OrderDto order) {
+    public OrderProcessed(
+            @JsonProperty("order")
+                    OrderDto order) {
         super(order);
         this.order = order;
     }
