@@ -16,7 +16,7 @@ import co.crisi.shipm8.port.api.IOrderServicePort;
 import co.crisi.shipm8.port.spi.IAddressPersistencePort;
 import co.crisi.shipm8.port.spi.IOrderPersistencePort;
 import co.crisi.shipm8.port.spi.IProductPersistencePort;
-import co.crisi.shipm8.port.spi.ISendMessagePort;
+import co.crisi.shipm8.port.spi.message.ISendMessagePort;
 import co.crisi.shipm8.port.spi.IShopperPersistencePort;
 import io.vavr.control.Either;
 import io.vavr.control.Try;

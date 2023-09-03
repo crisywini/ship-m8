@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Map;
 import org.apache.kafka.common.serialization.Deserializer;
 
-public class FailedOrderDeserializer implements Deserializer<OrderFailed> {
+public class OrderFailedDeserializer implements Deserializer<OrderFailed> {
 
     @Override
     public void close() {

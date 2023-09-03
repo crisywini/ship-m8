@@ -5,7 +5,7 @@ import co.crisi.shipm8.port.api.IOrderServicePort;
 import co.crisi.shipm8.port.spi.IAddressPersistencePort;
 import co.crisi.shipm8.port.spi.IOrderPersistencePort;
 import co.crisi.shipm8.port.spi.IProductPersistencePort;
-import co.crisi.shipm8.port.spi.ISendMessagePort;
+import co.crisi.shipm8.port.spi.message.ISendMessagePort;
 import co.crisi.shipm8.port.spi.IShopperPersistencePort;
 import co.crisi.shipm8.service.OrderServicePort;
 import org.springframework.beans.factory.annotation.Qualifier;
