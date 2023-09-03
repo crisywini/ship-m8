@@ -4,8 +4,9 @@ import co.crisi.shipm8.domain.IOrder;
 import co.crisi.shipm8.domain.IProduct;
 import co.crisi.shipm8.domain.data.Order;
 import co.crisi.shipm8.domain.data.input.OrderSaveDto;
+import co.crisi.shipm8.domain.event.OrderDto;
 import co.crisi.shipm8.domain.event.OrderProcessed;
-import co.crisi.shipm8.domain.event.ProductUpdate;
+import co.crisi.shipm8.domain.event.ProductUpdateDto;
 import co.crisi.shipm8.exception.business.AddressNotFoundException;
 import co.crisi.shipm8.exception.business.BusinessException;
 import co.crisi.shipm8.exception.business.OrderNotFoundException;
@@ -148,9 +149,10 @@ public class OrderServicePort implements IOrderServicePort {
         return Try.of(() -> {
                     var products = order.getProducts()
                             .stream()
-                            .map(product -> new ProductUpdate(product.getProductId(), product.getQuantity()))
+                            .map(product -> new ProductUpdateDto(product.getProductId(), product.getQuantity()))
                             .toList();
-                    var orderProcessed = new OrderProcessed(products);
+                    var orderDto = new OrderDto(order.getId(), products);
+                    var orderProcessed = new OrderProcessed(orderDto);
                     sendMessagePort.sendMessage(orderProcessed);
                     return order;
                 }).toEither()

@@ -3,13 +3,13 @@ package co.crisi.shipm8.domain.event;
 
 import java.util.List;
 
-public class OrderProcessed extends Message<List<ProductUpdate>> {
+public class OrderProcessed extends Message<OrderDto> {
 
-    private final List<ProductUpdate> products;
+    private final OrderDto order;
 
-    public OrderProcessed(List<ProductUpdate> value) {
-        super(value);
-        this.products = value;
+    public OrderProcessed(OrderDto order) {
+        super(order);
+        this.order = order;
     }
 
     @Override
@@ -17,8 +17,8 @@ public class OrderProcessed extends Message<List<ProductUpdate>> {
         return Messages.ORDER_PROCESSED;
     }
 
-    public List<ProductUpdate> getProducts() {
-        return List.copyOf(products);
+    public OrderDto getOrder() {
+        return order;
     }
 
 }
