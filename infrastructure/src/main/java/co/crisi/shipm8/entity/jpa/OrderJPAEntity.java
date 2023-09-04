@@ -80,7 +80,7 @@ public class OrderJPAEntity implements IOrder, Serializable {
     @Column(name = "order_completion_date")
     private LocalDate orderCompletionDate;
 
-    @OneToMany(mappedBy = "order", cascade = CascadeType.MERGE)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private List<ProductJPAEntity> products = new ArrayList<>();
 
     @ManyToOne

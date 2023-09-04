@@ -64,7 +64,7 @@ public class OrderServicePort implements IOrderServicePort {
         if (!id.equals(newInfo.getId())) {
             throw new BusinessException("Error in the body, the ids are not equal!");
         }
-        return save(newInfo);
+        return persistencePort.save(newInfo);
     }
 
     @Override
@@ -117,7 +117,7 @@ public class OrderServicePort implements IOrderServicePort {
         var billingAddress = addressPersistencePort.findById(order.billingAddressId()).orElseThrow();
         var shopper = shopperPersistencePort.findById(order.shopperId()).orElseThrow();
         List<IProduct> products = order.products().stream()
-                .map(product -> (IProduct) product)
+                .map(IProduct.class::cast)
                 .collect(Collectors.toList());
 
         return Try.of(() -> Order.builder()
