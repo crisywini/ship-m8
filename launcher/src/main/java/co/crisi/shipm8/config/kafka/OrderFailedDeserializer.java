@@ -1,6 +1,6 @@
 package co.crisi.shipm8.config.kafka;
 
-import co.crisi.shipm8.domain.event.OrderFailed;
+import co.crisi.shipm8.domain.message.OrderFailed;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Map;
 import org.apache.kafka.common.serialization.Deserializer;

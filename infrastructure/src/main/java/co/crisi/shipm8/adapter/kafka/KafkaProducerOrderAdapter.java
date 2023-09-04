@@ -1,7 +1,7 @@
 package co.crisi.shipm8.adapter.kafka;
 
-import co.crisi.shipm8.domain.event.OrderProcessed;
-import co.crisi.shipm8.domain.event.Topics;
+import co.crisi.shipm8.domain.message.OrderProcessed;
+import co.crisi.shipm8.domain.message.Topics;
 import co.crisi.shipm8.port.spi.message.ISendMessagePort;
 import lombok.RequiredArgsConstructor;
 import org.springframework.kafka.core.KafkaTemplate;

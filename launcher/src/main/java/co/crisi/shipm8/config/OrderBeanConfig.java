@@ -1,6 +1,6 @@
 package co.crisi.shipm8.config;
 
-import co.crisi.shipm8.domain.event.OrderProcessed;
+import co.crisi.shipm8.domain.message.OrderProcessed;
 import co.crisi.shipm8.port.api.IOrderServicePort;
 import co.crisi.shipm8.port.spi.IAddressPersistencePort;
 import co.crisi.shipm8.port.spi.IOrderPersistencePort;

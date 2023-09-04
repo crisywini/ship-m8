@@ -1,7 +1,7 @@
 package co.crisi.shipm8.config;
 
 import co.crisi.shipm8.config.kafka.OrderProcessedSerializer;
-import co.crisi.shipm8.domain.event.OrderProcessed;
+import co.crisi.shipm8.domain.message.OrderProcessed;
 import java.util.HashMap;
 import java.util.Map;
 import org.apache.kafka.clients.producer.ProducerConfig;

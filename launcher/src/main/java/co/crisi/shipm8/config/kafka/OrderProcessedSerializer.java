@@ -1,6 +1,6 @@
 package co.crisi.shipm8.config.kafka;
 
-import co.crisi.shipm8.domain.event.OrderProcessed;
+import co.crisi.shipm8.domain.message.OrderProcessed;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.Map;
 import org.apache.kafka.common.header.Headers;

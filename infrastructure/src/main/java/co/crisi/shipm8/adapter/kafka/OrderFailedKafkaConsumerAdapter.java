@@ -1,7 +1,7 @@
 package co.crisi.shipm8.adapter.kafka;
 
-import co.crisi.shipm8.domain.event.OrderFailed;
-import co.crisi.shipm8.domain.event.Topics;
+import co.crisi.shipm8.domain.message.OrderFailed;
+import co.crisi.shipm8.domain.message.Topics;
 import co.crisi.shipm8.port.spi.message.IReceiveMessagePort;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -18,7 +18,7 @@ public class OrderFailedKafkaConsumerAdapter implements IReceiveMessagePort<Orde
     @KafkaListener(id = "id", topics = Topics.EXCEPTION)
     @Override
     public void listen(OrderFailed message) {
-
+        log.info("Processing order failed message! {} ", message.getFailedOrder());
     }
 
 }
