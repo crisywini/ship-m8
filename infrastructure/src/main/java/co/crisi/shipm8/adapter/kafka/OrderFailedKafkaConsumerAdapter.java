@@ -8,6 +8,7 @@ import co.crisi.shipm8.domain.message.OrderFailed;
 import co.crisi.shipm8.domain.message.Topics;
 import co.crisi.shipm8.port.api.IOrderServicePort;
 import co.crisi.shipm8.port.spi.message.IReceiveMessagePort;
+import java.time.LocalDate;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +42,7 @@ public class OrderFailedKafkaConsumerAdapter implements IReceiveMessagePort<Orde
                 .shippingMethod(order.getShippingMethod())
                 .orderNotes(order.getOrderNotes())
                 .cancellationReason(message.getFailedOrder().errorMessage())
-                .orderCompletionDate(null)
+                .orderCompletionDate(LocalDate.now())
                 .products((List<IProduct>) order.getProducts())
                 .shopper(order.getShopper())
                 .build();
