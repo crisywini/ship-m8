@@ -4,6 +4,9 @@ import co.crisi.shipm8.domain.data.input.OrderSaveDto;
 import co.crisi.shipm8.mapper.OrderDtoMapper;
 import co.crisi.shipm8.model.OrderDto;
 import co.crisi.shipm8.port.api.IOrderServicePort;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.mapstruct.factory.Mappers;
 import org.springframework.http.HttpStatus;
@@ -26,6 +29,10 @@ public class OrderController {
 
 
     @PostMapping
+    @Operation(summary = "Creates a new Order")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Order Created")
+    })
     public ResponseEntity<OrderDto> save(
             @RequestBody
                     OrderSaveDto order) {
@@ -33,6 +40,10 @@ public class OrderController {
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Find an Order by its Id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Order Found")
+    })
     public ResponseEntity<OrderDto> findById(
             @PathVariable(name = "id")
                     Long id) {
