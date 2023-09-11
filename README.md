@@ -23,11 +23,11 @@ Can be found at:
 
 ## Event Driven Communication
 
-### Use case 1
+### Use case 
 
 _**When**_ a Shopper creates an Order 
 
-_**Then**_ the message Order Processed will be craeated 
+_**Then**_ the message Order Processed will be created
 
 _**And**_ the message Order Processed will be sent to Productopolis
 
