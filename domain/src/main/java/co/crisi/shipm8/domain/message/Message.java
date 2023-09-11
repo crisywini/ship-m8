@@ -1,4 +1,4 @@
-package co.crisi.shipm8.domain.event;
+package co.crisi.shipm8.domain.message;
 
 import lombok.RequiredArgsConstructor;
 

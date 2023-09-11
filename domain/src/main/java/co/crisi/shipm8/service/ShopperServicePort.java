@@ -7,6 +7,7 @@ import co.crisi.shipm8.exception.business.ShopperNotFoundException;
 import co.crisi.shipm8.port.api.IShopperServicePort;
 import co.crisi.shipm8.port.spi.IShopperPersistencePort;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 
@@ -17,7 +18,7 @@ public class ShopperServicePort implements IShopperServicePort {
 
     @Override
     public IShopper save(IShopper entity) {
-        if (persistencePort.existsById(entity.getId())) {
+        if (Objects.nonNull(entity.getId()) && persistencePort.existsById(entity.getId())) {
             throw new RepeatedProductException(String.format("The shopper with id %d already exists!", entity.getId()));
         }
         return persistencePort.save(entity);

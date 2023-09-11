@@ -1,4 +1,4 @@
-package co.crisi.shipm8.domain.event;
+package co.crisi.shipm8.domain.message;
 
 import lombok.experimental.UtilityClass;
 
@@ -6,4 +6,7 @@ import lombok.experimental.UtilityClass;
 public class Messages {
 
     public final String ORDER_PROCESSED = "orderProcessed";
+
+    public final String ORDER_FAILED = "orderFailed";
+
 }

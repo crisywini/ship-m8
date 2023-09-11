@@ -1,4 +1,4 @@
-package co.crisi.shipm8.port.spi;
+package co.crisi.shipm8.port.spi.message;
 
 public interface ISendMessagePort<T> {
 

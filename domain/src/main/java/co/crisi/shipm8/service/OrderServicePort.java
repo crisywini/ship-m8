@@ -4,8 +4,9 @@ import co.crisi.shipm8.domain.IOrder;
 import co.crisi.shipm8.domain.IProduct;
 import co.crisi.shipm8.domain.data.Order;
 import co.crisi.shipm8.domain.data.input.OrderSaveDto;
-import co.crisi.shipm8.domain.event.OrderProcessed;
-import co.crisi.shipm8.domain.event.ProductUpdate;
+import co.crisi.shipm8.domain.message.OrderDto;
+import co.crisi.shipm8.domain.message.OrderProcessed;
+import co.crisi.shipm8.domain.message.ProductUpdateDto;
 import co.crisi.shipm8.exception.business.AddressNotFoundException;
 import co.crisi.shipm8.exception.business.BusinessException;
 import co.crisi.shipm8.exception.business.OrderNotFoundException;
@@ -15,7 +16,7 @@ import co.crisi.shipm8.port.api.IOrderServicePort;
 import co.crisi.shipm8.port.spi.IAddressPersistencePort;
 import co.crisi.shipm8.port.spi.IOrderPersistencePort;
 import co.crisi.shipm8.port.spi.IProductPersistencePort;
-import co.crisi.shipm8.port.spi.ISendMessagePort;
+import co.crisi.shipm8.port.spi.message.ISendMessagePort;
 import co.crisi.shipm8.port.spi.IShopperPersistencePort;
 import io.vavr.control.Either;
 import io.vavr.control.Try;
@@ -63,7 +64,7 @@ public class OrderServicePort implements IOrderServicePort {
         if (!id.equals(newInfo.getId())) {
             throw new BusinessException("Error in the body, the ids are not equal!");
         }
-        return save(newInfo);
+        return persistencePort.save(newInfo);
     }
 
     @Override
@@ -116,7 +117,7 @@ public class OrderServicePort implements IOrderServicePort {
         var billingAddress = addressPersistencePort.findById(order.billingAddressId()).orElseThrow();
         var shopper = shopperPersistencePort.findById(order.shopperId()).orElseThrow();
         List<IProduct> products = order.products().stream()
-                .map(product -> (IProduct) product)
+                .map(IProduct.class::cast)
                 .collect(Collectors.toList());
 
         return Try.of(() -> Order.builder()
@@ -148,9 +149,10 @@ public class OrderServicePort implements IOrderServicePort {
         return Try.of(() -> {
                     var products = order.getProducts()
                             .stream()
-                            .map(product -> new ProductUpdate(product.getProductId(), product.getQuantity()))
+                            .map(product -> new ProductUpdateDto(product.getProductId(), product.getQuantity()))
                             .toList();
-                    var orderProcessed = new OrderProcessed(products);
+                    var orderDto = new OrderDto(order.getId(), products);
+                    var orderProcessed = new OrderProcessed(orderDto);
                     sendMessagePort.sendMessage(orderProcessed);
                     return order;
                 }).toEither()
