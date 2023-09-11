@@ -4,6 +4,9 @@ import co.crisi.shipm8.domain.data.Discount;
 import co.crisi.shipm8.mapper.DiscountDtoMapper;
 import co.crisi.shipm8.model.DiscountDto;
 import co.crisi.shipm8.port.api.IDiscountServicePort;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +32,10 @@ public class DiscountController {
     private final DiscountDtoMapper mapper = Mappers.getMapper(DiscountDtoMapper.class);
 
     @PostMapping
+    @Operation(summary = "Creates a new Discount")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Discount Created")
+    })
     public ResponseEntity<DiscountDto> save(
             @RequestBody
                     Discount discount) {
@@ -37,11 +44,19 @@ public class DiscountController {
     }
 
     @GetMapping
+    @Operation(summary = "Find all Discounts")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Discounts Found")
+    })
     public ResponseEntity<List<DiscountDto>> findAll() {
         return ResponseEntity.ok(mapper.map(servicePort.getAll()));
     }
 
     @GetMapping("/{id}")
+    @Operation(summary = "Find a Discount by its Id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Discount Found")
+    })
     public ResponseEntity<DiscountDto> findById(
             @PathVariable(name = "id")
                     Long id) {
@@ -49,6 +64,10 @@ public class DiscountController {
     }
 
     @DeleteMapping("/{id}")
+    @Operation(summary = "Delete a Discount by its Id")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Discount Deleted")
+    })
     public ResponseEntity<Void> deleteById(
             @PathVariable(name = "id")
                     Long id) {
