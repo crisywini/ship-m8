@@ -54,4 +54,4 @@ amount to buy was less than 0 or it was higher than the stock)
 
 ## Database Schema
 
-![Database_schema](https://github.com/crisywini/productopolis/blob/develop/db-scheme-productopolis.png)
+![Database_schema](https://github.com/crisywini/ship-m8/blob/develop/e-commerce-order-processing-db.png)
