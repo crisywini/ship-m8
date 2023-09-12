@@ -51,3 +51,7 @@ _**And**_ the message Order Processed will be sent to Productopolis
 **_And_** Ship-M8 will listen to the message Order Failed in
 case of the order was not successfully created (i.e, the product did not have a correct id or its
 amount to buy was less than 0 or it was higher than the stock)
+
+## Database Schema
+
+![Database_schema](https://github.com/crisywini/productopolis/blob/develop/db-scheme-productopolis.png)
